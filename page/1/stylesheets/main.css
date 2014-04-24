@@ -333,12 +333,14 @@ pre ol li{
 
  /*footer*/
  .footer{
- 	/*margin-top: 1000px;*/
  	padding:30px;
+ 	margin:0 auto;
  }
-.social > h3{
+.social > h3
+,list > h3{
 	color:rgb(245,245,245);
 }
+
 .social li{
 	display:inline;
 	margin-right: 8px;
@@ -362,4 +364,40 @@ pre ol li{
     transition: color 1.5s ease-out;
     
 	color: rgb(240,240,240);
+}
+
+.footer .list{
+	color:rgb(245,245,245);
+}
+
+.footer .list li
+,.footer .list a{
+	color:rgb(30,35,41);
+}
+
+.footer .list li{
+	line-height: 25px;
+}
+
+.footer .list a:link{
+	color:rgb(30,35,41);
+}
+
+.footer .list a:hover{
+	color:#41b7d8; 
+	text-decoration:none;
+	border-bottom:1px solid;
+	padding-bottom:1px; /*设置下方隔开距离此处为3像素*/
+}
+
+.footer .list a:active{
+	color:#317ec9;
+}
+
+
+.span3 {
+	width: 30%;
+	/*border:1px solid;*/
+	margin-right: 8px;
+	float: left;
 }
