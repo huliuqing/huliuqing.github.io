@@ -1,0 +1,103 @@
+<rss version="2.0">
+<channel>
+<title></title>
+<link></link>
+<description>Powered By <a href="http://lizheming.gitcafe.com">PMBlog</a></description>
+<language>zh-cn</language>
+<ttl>10</ttl>
+<item>
+<title><![CDATA[PMBlog links 和menus使用介绍]]></title>
+<description><![CDATA[&lt;p&gt;最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。&lt;/p&gt;
+
+&lt;p&gt;在这里我想对51CTO的全体工作人员说一句&#039;cao 草&#039;，能不能联系你们并回复下我。&lt;/p&gt;
+
+&lt;p&gt;没办法想到了在github可以开通自己的blog，尝试了一下。不过在使用jekyll的时候环境一直无法搭建，感谢公司&lt;/p&gt;
+
+&lt;p&gt;万幸在强大的github上，找到了PMBlog，谢谢&lt;a href=&quot;https://github.com/lizheming&quot;&gt;公子&lt;/a&gt;（类似jekyll）。现在介绍关于PMBlog程序中links和menus插件的相关使用方法&lt;/p&gt;
+
+&lt;h2&gt;PMBlog的links链接和menus导航基本介绍&lt;/h2&gt;
+
+&lt;p&gt;通过如下地址下载需要的插件&lt;a href=&quot;https://github.com/lizheming/PMBlog/wiki/%E6%8F%92%E4%BB%B6&quot;&gt;PMBlog 插件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;这里我下载的是 Page2Link 和 Page2Menu插件，并放置到usr/plugin目录下&lt;/p&gt;
+
+&lt;p&gt;Page2Link插件&lt;/p&gt;
+
+&lt;blockquote&gt;友情链接插件，按照links.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成links.html。主题模板中可以使用{{link}}变量调用它。{{link}}变量是一个数组变量，需要使用循环才能输出&lt;/blockquote&gt;
+
+&lt;p&gt;Page2Menu插件&lt;/p&gt;
+
+&lt;blockquote&gt;导航链接插件，按照menus.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成menus.html。主题模板中可以使用{{menus}}变量调用它。{{menus}}变量是一个数组变量，需要使用循环才能输出&lt;/blockquote&gt;
+
+&lt;h2&gt;插件使用&lt;/h2&gt;
+
+&lt;p&gt;关于这两个的插件使用也是非常的简单的，我们只需要&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 配置config.php文件
+$config[&#039;actived_plugins&#039;] =&quot;Page2Links,Page2Menus&quot; //我们也可以简单的使用*开启全部的插件
+# 使用
+在模板文件中，我们仅仅需要添加如下代码便可以完成，link/menu的功能
+{% for item in menu/link %}
+    {{item.title}}  {# MenuItem&#039;s title #}
+    {{item.url}}    {# MenuItem&#039;s url #}
+    {{item.description}}    {# MenuItem&#039;s description #}
+ {% endfor %}
+&lt;/code&gt;&lt;/pre&gt;
+]]></description>
+<pubDate>2014-04-24T14:13:34+08:00</pubDate>
+<guid>http://huliuqing.github.io/introduce-pmblog-lins-menus.html</guid>
+<link>http://huliuqing.github.io/introduce-pmblog-lins-menus.html</link>
+</item>
+<item>
+<title><![CDATA[关于我 / About Me]]></title>
+<description><![CDATA[&lt;p&gt;柳公子&lt;/p&gt;
+
+&lt;h2&gt;出生&amp;求学&lt;/h2&gt;
+
+&lt;p&gt;我出生在江西九江的一个农村。
+12岁以前过着无忧无虑的生活：春天放牛、夏天钓虾，冬天烤炭火。
+12-23岁开始一个人的求学路，借读初中、高中，再然后于江西南昌读大学&lt;/p&gt;
+
+&lt;h2&gt;教育&lt;/h2&gt;
+
+&lt;p&gt;2007年9月入学江西南昌大学软件学院，软件技术专业。开始程序开发之路&lt;/p&gt;
+
+&lt;h2&gt;经历&lt;/h2&gt;
+
+&lt;p&gt;关于我的经历，2008年之后才慢慢开始精彩起来&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2008年入伍&lt;/li&gt;
+&lt;li&gt;2010年退役&lt;/li&gt;
+&lt;li&gt;2011年续学&lt;/li&gt;
+&lt;li&gt;2011年底进入江西腾王科技开发游戏。结果进入web开发领域，从事PHP开发相关工作至今&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;联系我&lt;/h2&gt;
+
+&lt;p&gt;可以通过以下方式联系到我：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;gmail:huliuqing1989@gmail.com&lt;/li&gt;
+&lt;li&gt;weibo:http://weibo.com/focusliuqing&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;关注我&lt;/h2&gt;
+
+&lt;p&gt;作为伪技术型宅男，偶尔会出现在这些地方。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;stackoverflow : http://stackoverflow.com/users/1969039/liuqing-hu&lt;/li&gt;
+&lt;li&gt;github : https://github.com/huliuqing&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;目标&lt;/h2&gt;
+
+&lt;p&gt;为成为正真的技术型宅男而努力奋斗&lt;/p&gt;
+]]></description>
+<pubDate>2014-04-22T16:25:02+08:00</pubDate>
+<guid>http://huliuqing.github.io/aboutme.html</guid>
+<link>http://huliuqing.github.io/aboutme.html</link>
+</item>
+</channel>
+</rss>
