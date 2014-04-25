@@ -6,6 +6,118 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
+<title><![CDATA[个人技能一览]]></title>
+<description><![CDATA[&lt;script type=&quot;text/javascript&quot; src=&quot;http://visjs.org/dist/vis.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;在这边梳理一下个人所学习过，并且一直在学习的专业技能，当然还有很多没有学习到的内容。
+但在此还是写梳理出掌握的比较好。也算是对自己这3年来的一个交代吧&lt;/p&gt;
+
+&lt;div id=&quot;skills&quot;&gt;&lt;/div&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+  // create an array with nodes
+  var nodes = [
+    {id: 1, label: &#039;已掌握Web开发技能&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 2, label: &#039;客户端编程&#039;},
+    {id: 3, label: &#039;服务器端编程&#039;},
+    {id: 4, label: &#039;数据库存储&#039;},
+    {id: 5, label: &#039;html&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 6, label: &#039;css&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 7, label: &#039;javascript&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 8, label: &#039;历史标准语规范&#039;},
+    {id: 9, label: &#039;常用标签与属性&#039;},
+    {id: 10, label: &#039;DOM / BOM&#039;},
+    {id: 11, label: &#039;语法、继承规则&#039;},
+    {id: 12, label: &#039;选择器与常用属性&#039;},
+    {id: 13, label: &#039;基本布局与定位知识&#039;},
+    {id: 14, label: &#039;css禅意花园与css实战手册&#039;},
+    {id: 15, label: &#039;ajax基础知识&#039;},
+    {id: 16, label: &#039;jquery基础知识&#039;},
+    {id: 17, label: &#039;javascript  javascript DOM 编程艺术(2th)&#039;},
+    {id: 18, label: &#039;前端基础优化知识&#039;},
+    {id: 19, label: &#039;PHP&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 20, label: &#039;HTTP&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 21, label: &#039;知识方法与可读性&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 22, label: &#039;php语言 、手册核心内容阅读完&#039;},
+    {id: 23, label: &#039;源码阅读Zend1.0/Typecho/ucenter&#039;},
+    {id: 24, label: &#039;框架Zend/smarty&#039;},
+    {id: 30, label: &#039;php运行时配置与性能优化&#039;},
+    {id: 31, label: &#039;php生命周期与变量等内核实现&#039;},
+    {id: 25, label: &#039;http基础知识&#039;},
+    {id: 26, label: &#039;代码可读性&#039;},
+    {id: 27, label: &#039;web基础安全知识与SQL注入&#039;},
+    {id: 28, label: &#039;设计模式 学习中&#039;},
+    {id: 29, label: &#039;基础缓存策略与php调试技术手册&#039;},
+    {id: 32, label: &#039;mysql数据库&#039;,color:&#039;rgb(61,89,159)&#039;,fontColor:&#039;#fff&#039;},
+    {id: 33, label: &#039;DML/DQL/DDL&#039;},
+    {id: 34, label: &#039;数据类型/函数&#039;},
+    {id: 35, label: &#039;事务、存储过程、视图基础知识&#039;},
+    {id: 36, label: &#039;基础sql优化策略&#039;},
+  ];
+
+  // create an array with edges
+  var edges = [
+    {from: 1, to: 2,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 1, to: 3,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 1, to: 4,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 2, to: 5,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 2, to: 6,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 2, to: 7,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 5, to: 8,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 5, to: 9,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 5, to: 10,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 6, to: 11,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 6, to: 12,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 6, to: 13,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 6, to: 14,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 7, to: 15,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 7, to: 16,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 7, to: 17,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 7, to: 18,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 3, to: 19,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 3, to: 20,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 3, to: 21,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 19, to: 22,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 19, to: 23,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 19, to: 24,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 19, to: 30,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 19, to: 31,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 20, to: 25,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 21, to: 26,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 21, to: 27,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 21, to: 28,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 21, to: 29,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 4, to: 32,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 32, to: 33,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 32, to: 34,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 32, to: 35,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}},
+    {from: 32, to: 36,style: &#039;dash-line&#039;, dash: {length: 5, gap: 5}}
+  ];
+
+  // create a graph
+  var container = document.getElementById(&#039;skills&#039;);
+  var data= {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    nodes: {
+      shape: &#039;box&#039;
+    },
+    edges: {
+      length: 700
+    },
+    width:&#039;800px&#039;,
+    height:&#039;800px&#039;
+  };
+  var graph = new vis.Graph(container, data, options);
+&lt;/script&gt;
+]]></description>
+<pubDate>2014-04-25T16:48:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/web-skills-me.html</guid>
+<link>http://huliuqing.github.io/web-skills-me.html</link>
+</item>
+<item>
 <title><![CDATA[PMBlog links 和menus使用介绍]]></title>
 <description><![CDATA[&lt;p&gt;最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。&lt;/p&gt;
 
