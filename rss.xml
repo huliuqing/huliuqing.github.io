@@ -6,6 +6,74 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
+<title><![CDATA[个人书单]]></title>
+<description><![CDATA[&lt;p&gt;过去三年，在位于江西南昌的一家初创公司从事PHP相关开发工作，且行且努力。以下列出个人这三年阅读的图书&lt;/p&gt;
+
+&lt;h2&gt;目标&lt;/h2&gt;
+
+&lt;p&gt;领域内深入 、 领域外涉猎&lt;/p&gt;
+
+&lt;h2&gt;编程语言&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;《java核心技术（卷一、卷二）》 --2011年8-10月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《c++探秘：68讲贯通C++》--2012年1-2月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《PHP和MySql web开发》  --2012年4-5月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《高性能php应用开发》   --2012年10-11月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《PHP调试技术手册》     --2013年7月份&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;前端 css&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;《CSS禅意花园》  --2013年2-3月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《CSS实战手册》  --2013年5-6月份&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;前端 javascript&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;《javascript DOM编程艺术》 --2013年7月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《Node.js 入门指南》       --2013年8月份&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;数据库&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;《Oracle 10g宝典》 --2011年11-12月份&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《SQLCOOKBOK》&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;阅读手册&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;php手册  http://php.net  --2012年3月至今&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;正在阅读&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;《php高级程序设计 -模式、框架与调试》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《MySQL技术内幕InnoDB存储引擎》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《无懈可击的web项目》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《面向对象分析与设计（第三版）》&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;想要阅读&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;《大话设计模式》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《大话数据结构》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《章亦春nginx漫谈》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《apache手册》&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;《apache手册》&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+]]></description>
+<pubDate>2014-04-28T17:13:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/book-lists.html</guid>
+<link>http://huliuqing.github.io/book-lists.html</link>
+</item>
+<item>
 <title><![CDATA[个人技能一览]]></title>
 <description><![CDATA[&lt;script type=&quot;text/javascript&quot; src=&quot;http://visjs.org/dist/vis.js&quot;&gt;&lt;/script&gt;
 

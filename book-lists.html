@@ -66,49 +66,75 @@
 					</div>
 				</div><!--end/left sider-->                <div class="posts">
                     <div class="post">
-                        <h2><a href="http://huliuqing.github.io/introduce-pmblog-lins-menus.html">PMBlog links 和menus使用介绍</a></h2>
-                        <div class="post-content"><p>最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。</p>
+                        <h2><a href="http://huliuqing.github.io/book-lists.html">个人书单</a></h2>
+                        <div class="post-content"><p>过去三年，在位于江西南昌的一家初创公司从事PHP相关开发工作，且行且努力。以下列出个人这三年阅读的图书</p>
 
-<p>在这里我想对51CTO的全体工作人员说一句'cao 草'，能不能联系你们并回复下我。</p>
+<h2>目标</h2>
 
-<p>没办法想到了在github可以开通自己的blog，尝试了一下。不过在使用jekyll的时候环境一直无法搭建，感谢公司</p>
+<p>领域内深入 、 领域外涉猎</p>
 
-<p>万幸在强大的github上，找到了PMBlog，谢谢<a href="https://github.com/lizheming">公子</a>（类似jekyll）。现在介绍关于PMBlog程序中links和menus插件的相关使用方法</p>
+<h2>编程语言</h2>
 
-<h2>PMBlog的links链接和menus导航基本介绍</h2>
+<ul>
+<li><p>《java核心技术（卷一、卷二）》 --2011年8-10月份</p></li>
+<li><p>《c++探秘：68讲贯通C++》--2012年1-2月份</p></li>
+<li><p>《PHP和MySql web开发》  --2012年4-5月份</p></li>
+<li><p>《高性能php应用开发》   --2012年10-11月份</p></li>
+<li><p>《PHP调试技术手册》     --2013年7月份</p></li>
+</ul>
 
-<p>通过如下地址下载需要的插件<a href="https://github.com/lizheming/PMBlog/wiki/%E6%8F%92%E4%BB%B6">PMBlog 插件</a></p>
+<h2>前端 css</h2>
 
-<p>这里我下载的是 Page2Link 和 Page2Menu插件，并放置到usr/plugin目录下</p>
+<ul>
+<li><p>《CSS禅意花园》  --2013年2-3月份</p></li>
+<li><p>《CSS实战手册》  --2013年5-6月份</p></li>
+</ul>
 
-<p>Page2Link插件</p>
+<h2>前端 javascript</h2>
 
-<blockquote>友情链接插件，按照links.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成links.html。主题模板中可以使用{{link}}变量调用它。{{link}}变量是一个数组变量，需要使用循环才能输出</blockquote>
+<ul>
+<li><p>《javascript DOM编程艺术》 --2013年7月份</p></li>
+<li><p>《Node.js 入门指南》       --2013年8月份</p></li>
+</ul>
 
-<p>Page2Menu插件</p>
+<h2>数据库</h2>
 
-<blockquote>导航链接插件，按照menus.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成menus.html。主题模板中可以使用{{menus}}变量调用它。{{menus}}变量是一个数组变量，需要使用循环才能输出</blockquote>
+<ul>
+<li><p>《Oracle 10g宝典》 --2011年11-12月份</p></li>
+<li><p>《SQLCOOKBOK》</p></li>
+</ul>
 
-<h2>插件使用</h2>
+<h2>阅读手册</h2>
 
-<p>关于这两个的插件使用也是非常的简单的，我们只需要</p>
+<ul>
+<li>php手册  http://php.net  --2012年3月至今</li>
+</ul>
 
-<pre><code># 配置config.php文件
-$config['actived_plugins'] ="Page2Links,Page2Menus" //我们也可以简单的使用*开启全部的插件
-# 使用
-在模板文件中，我们仅仅需要添加如下代码便可以完成，link/menu的功能
-{% for item in menu/link %}
-    {{item.title}}  {# MenuItem's title #}
-    {{item.url}}    {# MenuItem's url #}
-    {{item.description}}    {# MenuItem's description #}
- {% endfor %}
-</code></pre>
+<h2>正在阅读</h2>
+
+<ul>
+<li><p>《php高级程序设计 -模式、框架与调试》</p></li>
+<li><p>《MySQL技术内幕InnoDB存储引擎》</p></li>
+<li><p>《无懈可击的web项目》</p></li>
+<li><p>《面向对象分析与设计（第三版）》</p></li>
+</ul>
+
+<h2>想要阅读</h2>
+
+<ul>
+<li><p>《大话设计模式》</p></li>
+<li><p>《大话数据结构》</p></li>
+<li><p>《章亦春nginx漫谈》</p></li>
+<li><p>《apache手册》</p></li>
+<li><p>《apache手册》</p></li>
+</ul>
 </div>
-                        <span class="post-date">2014-04-24 14:13:34</span>
+                        <span class="post-date">2014-04-28 17:13:00</span>
                         <span class="post-tag">
                                                         <a href="http://huliuqing.github.io/tag/介绍">介绍</a> 
-                                                        <a href="http://huliuqing.github.io/tag/PHP项目">PHP项目</a> 
-                                                        <a href="http://huliuqing.github.io/tag/PMBlog">PMBlog</a> 
+                                                        <a href="http://huliuqing.github.io/tag/个人介绍">个人介绍</a> 
+                                                        <a href="http://huliuqing.github.io/tag/柳公子">柳公子</a> 
+                                                        <a href="http://huliuqing.github.io/tag/书单">书单</a> 
                                                     </span>
                     </div>
 
