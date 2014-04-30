@@ -4,10 +4,202 @@
   <title><![CDATA[]]></title>
   <link href="/atom.xml" rel="self"/>
   <link href="/"/>
-  <updated>2014-04-29T11:20:18+08:00</updated>
+  <updated>2014-04-30T15:30:20+08:00</updated>
   <id>/</id>
   <generator uri="http://gitcafe.com/lizheming/pmblog">PMBlog</generator>
 
+    <entry>
+    <title type="html"><![CDATA[c++指针的指针]]></title>
+    <link href="http://huliuqing.github.io/2014-04-30-cpp-pointers-to-pointers.html"/>
+    <id>http://huliuqing.github.io/2014-04-30-cpp-pointers-to-pointers.html</id>
+    <updated>2014-04-30T14:30:00+08:00</updated>
+    <content type="html"><![CDATA[<p>本人最近在学习数据结构（大学没学），感觉在指针问题上需要进行更加深入的学习，才能更好的把数据结构学习和运用好。这篇文章是本人翻译的有关指针的文章(<a href="http://www.eskimo.com/~scs/cclass/int/sx8.html" title="Pointers to Pointers">Pointers to Pointers</a>)，供自己学习，有很多语法及表述不正确的地方，如果看到请指正或联系我： liuqing.phper.cn@gmail.com</p>
+
+<p>自从我们可以使用整型指针，字符型指针，自定义结构类型的指针，又或者,我们可以使用任何C语言的任何类型的指针。于是我们可以使用指针指向另外一个指针也就理所当然的了。</p>
+
+<p>如果我们曾经思考过关于指针的问题，那么去思考关于指针本身与之所指向的内容，或许更能够让我加深对指针的理解，也就是我所说的指针的指针。</p>
+
+<p>虽然我们能够区分，指针所指向的内容，还是指针所指向的内容的指针（当然,我们也可以去理解指向指针的指针,指向指针的指针的指针,虽然这些没有太多实际用途）。</p>
+
+<p>指针的指针定义如下：</p>
+
+<pre><code>int **ipp;
+</code></pre>
+
+<p>两个星号表示指针的指针。首先让我们看一个简单的例子，来演示ipp指向通过声明定义的指针类型数据（int *ip1或 int * ip2），这些指针类型数据则指向整型变量(int i,j,k)</p>
+
+<pre><code>int i = 5, j = 6; k = 7;
+int *ip1 = &amp;i, *ip2 = &amp;j;
+</code></pre>
+
+<p>接下来对ipp赋值</p>
+
+<pre><code>ipp = &amp;ip1;
+</code></pre>
+
+<p>ipp指向 ip1，ip1指向i,即**ipp就是i，i=5。我们可以使用下图表示 </p>
+
+<p><img src="http://huliuqing.github.com/images/post-source/2014-04-30-cpp-point-to-point-1.gif" /></p>
+
+<p>如果我们再次设置ipp如下：</p>
+
+<pre><code>*ipp = ip2;
+</code></pre>
+
+<p>我们便改变了ipp变量所指向的指针地址为ip2.因而ipp（ip1）也就指向了j,如果我们赋值如下</p>
+
+<p><img src="http://huliuqing.github.com/images/post-source/2014-04-30-cpp-point-to-point-2.gif" /></p>
+
+<pre><code>*ipp = &amp;k;
+</code></pre>
+
+<p>我们便改变了ipp变量所指向的指针地址，为k的地址.因而ipp（ip1）也就指向了k</p>
+
+<p><img src="http://huliuqing.github.com/images/post-source/2014-04-30-cpp-point-to-point-3.gif" /></p>
+
+<p>在实际应用中，指针的指针应用在哪会比较合适呢？其中一个应用案例就是：通过把普通形参替换成指针做函数返回值。为了演示和说明，我们通过传入一个简单类型（如int型）的指针类型做函数的形参，函数如下：</p>
+
+<pre><code>f(int *ip)
+{
+    *ip = 5;
+}
+</code></pre>
+
+<p>然后调用</p>
+
+<pre><code>int i;
+f(&amp;i);
+</code></pre>
+
+<p>调用f函数之后将会“返回” 5给函数主调函数所传入的指针类型实参。</p>
+
+<p>在这个示例中，主调函数为i变量。函数可以通过这种方法(传入指针类型变量)返回多个值。因为函数是只可以返回一个值。需要注意的是f函数是通过一个指针类型变量(int *)来返回值的。   </p>
+
+<p>现在，如果我们需要函数返回一个指针，传入的形参类型需要为指针的指针。在这有一个函数为长度为n的字符分配内存，失败返回0、成功返回1，并且返回指针指向新分配内存的指针</p>
+
+<pre><code>#include &lt;stdlib.h&gt;
+
+int allocstr(int len, char **retptr)
+{
+    char *p = malloc(len + 1);  /* +1 for \0 */
+    if(p == NULL)
+        return 0;
+    *retptr = p;
+    return 1;
+}
+
+//主调函数如下
+char *string = "Hello, world!";
+char *copystr;
+if(allocstr(strlen(string), &amp;copystr))
+    strcpy(copystr, string);
+else
+    fprintf(stderr, "out of memory\n");
+</code></pre>
+
+<p>（allocstr函数并非特别实用，仅仅是个简单的内存分配函数示例，为了易于调用并直接分配内存空间。我们使用的chkmalloc函数将更加实用）</p>
+
+<pre><code>double *dptr;
+if(!hypotheticalwrapperfunc(100, sizeof(double), &amp;dptr))
+    fprintf(stderr, "out of memory\n");
+</code></pre>
+
+<p>hypotheticalwrapperfunc不允许传入void <strong>类型参数，而是需要传入double</strong>类型参数
+对于指针的指针，同样适用于模拟实现多维数组的动态内存分配，这将在下一章节讨论。</p>
+
+<p>最后一个示例，让我们看看指针的指针是如何用来解决链表中插入和删除这个令人讨厌的问题的。简单起见，我们仅仅考虑整型链表，结构体如下：</p>
+
+<p>struct list
+    {
+        int item;
+        struct list *next;
+    };</p>
+
+<p>让我们尝试从链表中删除给定的整数。简单的解决方案如下：    </p>
+
+<pre><code>/* delete node containing i from list pointed to by lp */
+
+struct list *lp, *prevlp;
+for(lp = list; lp != NULL; lp = lp-&gt;next)
+{
+    if(lp-&gt;item == i)
+    {
+        if(lp == list)
+        {
+            list = lp-&gt;next;
+        }else
+        {
+            prevlp-&gt;next = lp-&gt;next;
+            break;
+        }
+        prevlp = lp;
+    }
+}
+</code></pre>
+
+<p>这段代码是可以运行的，但是存在两个不足之处。
+    第一、我们需要使用一个额外的变量来保存节点与节点的关系。
+    第二、当节点在链表头部被删除，我们需要使用额外的测试。为什么会出现这两个不足，原因在于我们从链表中删除一个节点，会涉及到指针所指向的节点需要移动到下一个节点（删除节点的前一节点的指针，需要指向删除节点的下一节点）。但这取决于删除节点是不是头一个节点，如果是头一个节点我们需要时指针指向链表的新头部，如果不是我们需要将删除节点的前一个节点的指针指向下一个节点。</p>
+
+<p>为了阐明这一点，加点我们有一个链表 list(1,2,3)。让我们从表中删除节点1。当我们找到1节点时，指针变量lp指向节点1，而链表list的指针其实也是指向同一个节点1的，如下图（a）所示：</p>
+
+<p><img src="http://huliuqing.github.com/images/post-source/2014-04-30-cpp-point-to-point-4.gif" /></p>
+
+<p>删除节点1之后，我们需要使链表list的指针指向链表的第二个节点，也就是链表新的头结点（图（b）所示）。</p>
+
+<p>假使我们需要删除的是元素的节点2（如图（c）所示）。</p>
+
+<p>我们则需要让链表的第一个节点的指针指向节点3。</p>
+
+<p>指针变量prevlp要保存前一个节点，因为我们需要让它的下一个节点做出调整（另外我们要注意的是如果我们要删除第三个节点，我们要把它所指向下一个节点地址，复制给节点2，但节点3的下一个节点地址为空，所以此时节点2就是链表新的尾节点）。</p>
+
+<p>让我们再来重写链表的删除操作，通过运用链表指针的指针，新的实现方法更加简单。这个指针将指向我们所查找节点的指针，它既可以指向头指针也可以指向下一个节点指针。直到这个指针所指向的指针，是指向我们需要查找的节点时为止，它指向我们查找并需要修改删除的节点指针。让我们来看看代码。</p>
+
+<p>struct list **lpp;
+    for(lpp = &list; <em>lpp != NULL; lpp = &amp;(</em>lpp)->next)
+    {
+        if( (<em>lpp)->item == i)
+        {
+            *lpp = (</em>lpp)->next;
+            break;<br />
+        }
+    }</p>
+
+<p>代码 <em>lpp = (</em>lpp)->next会更新当前的指针，不论是头指针还是其中的任何一个指针（当然初见之下，在链表上运用指针的指针，所采用的算法并不会带来多大的好处）。为了简单阐述指针的指针在lpp变量上的操作，通过两张图来演示删除第一个节点（左图）和第二个节点（右图）。</p>
+
+<p><img src="http://huliuqing.github.com/images/post-source/2014-04-30-cpp-point-to-point-5.gif" /></p>
+
+<p>在以上两个链表删除操作的示例中</p>
+
+<pre><code>① lpp变量所指向的是，一个指向被删除节点的节点指针。
+② lpp所指向的指针，是将被更新的指针。
+③ 新的指针（*lpp更新的指针）是被删除节点的下一个指针，它永远是(*lpp)-&gt;next
+</code></pre>
+
+<p>*lpp所指向的下一个节点指针，也就是lpp所指向的指针的指针。可以替换如下： </p>
+
+<p>lpp = &amp;(*lpp)->next</p>
+
+<p>通过<em>lpp,将lpp指向list链表的下一个域。不管怎样括号都不能省略，因为->优先级高于</em>的优先级。</p>
+
+<p>接下来让我们看一个相关的示例，让我们在list链表中插入一个新的节点。同样适用list链表结构的指针的指针，这样，我们就不用来区别对待list链表在不同情况下的插入了。</p>
+
+<p>/* insert node newlp into list */</p>
+
+<pre><code>struct list **lpp;
+for(lpp = &amp;list; *lpp != NULL; lpp = &amp;(*lpp)-&gt;next)
+{
+    struct list *lp = *lpp;
+    if(newlp-&gt;item &lt; lp-&gt;item)
+    {
+        newlp-&gt;next = lp;
+        *lpp = newlp;
+        break;
+    }
+}
+</code></pre>
+]]></content>
+  </entry>
     <entry>
     <title type="html"><![CDATA[个人书单]]></title>
     <link href="http://huliuqing.github.io/book-lists.html"/>
