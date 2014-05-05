@@ -216,6 +216,10 @@
 	min-height: 80px;
 }
 
+.comments-thread{
+	margin:15px 0 0 0;
+}
+
 /*blockquote style from http://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/*/
 blockquote {
   background: #f9f9f9;
