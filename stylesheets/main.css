@@ -216,9 +216,6 @@
 	min-height: 80px;
 }
 
-.comments-thread{
-	margin:15px 0 0 0;
-}
 
 /*blockquote style from http://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/*/
 blockquote {
@@ -307,6 +304,9 @@ pre ol li{
 	margin-left: 30px;
 }
 
+.comments-thread{
+	margin:15px 24px 0 24px;
+}
 
 /* pagination*/
 .pagination{
