@@ -66,6 +66,48 @@
 					</div>
 				</div><!--end/left sider-->                <div class="posts">
                                             <div class="post">
+                            <h2><a href="http://huliuqing.github.io/introduce-pmblog-lins-menus.html">PMBlog links 和menus使用介绍</a></h2>
+                            <div class="post-content"><p>最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。</p>
+
+<p>在这里我想对51CTO的全体工作人员说一句'cao 草'，能不能联系你们并回复下我。</p>
+
+<p>没办法想到了在github可以开通自己的blog，尝试了一下。不过在使用jekyll的时候环境一直无法搭建，感谢公司</p>
+
+<p>万幸在强大的github上，找到了PMBlog，谢谢<a href="https://github.com/lizheming">公子</a>（类似jekyll）。现在介绍关于PMBlog程序中links和menus插件的相关使用方法</p>
+
+<h2>PMBlog的links链接和menus导航基本介绍</h2>
+
+<p>通过如下地址下载需要的插件<a href="https://github.com/lizheming/PMBlog/wiki/%E6%8F%92%E4%BB%B6">PMBlog 插件</a></p>
+
+<p>这里我下载的是 Page2Link 和 Page2Menu插件，并放置到usr/plugin目录下</p>
+
+<p>Page2Link插件</p>
+
+<blockquote>友情链接插件，按照links.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成links.html。主题模板中可以使用{{link}}变量调用它。{{link}}变量是一个数组变量，需要使用循环才能输出</blockquote>
+
+<p>Page2Menu插件</p>
+
+<blockquote>导航链接插件，按照menus.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成menus.html。主题模板中可以使用{{menus}}变量调用它。{{menus}}变量是一个数组变量，需要使用循环才能输出</blockquote>
+
+<h2>插件使用</h2>
+
+<p>关于这两个的插件使用也是非常的简单的，我们只需要</p>
+
+<pre><code># 配置config.php文件
+$config['actived_plugins'] ="Page2Links,Page2Menus" //我们也可以简单的使用*开启全部的插件
+# 使用
+在模板文件中，我们仅仅需要添加如下代码便可以完成，link/menu的功能
+{% for item in menu/link %}
+    {{item.title}}  {# MenuItem's title #}
+    {{item.url}}    {# MenuItem's url #}
+    {{item.description}}    {# MenuItem's description #}
+ {% endfor %}
+</code></pre>
+</div>
+                            <span class="post-date">2014-04-24 14:13:34</span>
+                            <span class="post-tag">介绍, PHP项目, PMBlog</span>
+                        </div>
+                                            <div class="post">
                             <h2><a href="http://huliuqing.github.io/aboutme.html">关于我 / About Me</a></h2>
                             <div class="post-content"><p>柳公子</p>
 
