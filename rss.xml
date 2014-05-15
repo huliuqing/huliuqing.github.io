@@ -6,6 +6,189 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
+<title><![CDATA[详解PHP中对象属性遍历]]></title>
+<description><![CDATA[&lt;h2&gt;对象迭代&lt;/h2&gt;
+
+&lt;p&gt;&lt;blockquote&gt;
+    如未特别标明，文章均属原创。转载请注明出处 &lt;/p&gt;
+
+&lt;p&gt;by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
+&lt;/blockquote&gt;&lt;/p&gt;
+
+&lt;p&gt;php官网手册对于&lt;a href=&quot;http://www.php.net/manual/zh/language.oop5.iterations.php&quot; target=&quot;_blank&quot;&gt;遍历对象&lt;/a&gt;解释如下：
+&lt;blockquote&gt;PHP 5 提供了一种定义对象的方法使其可以通过单元列表来遍历，例如用 foreach 语句。默认情况下，所有可见属性都将被用于遍历。 &lt;/blockquote&gt;&lt;/p&gt;
+
+&lt;p&gt;不过使用简单的foreach遍历对象，仅仅能够遍历出对象实例中可见（public)属性的值。&lt;/p&gt;
+
+&lt;p&gt;foreach是如何实现对对象进行遍历的呢？&lt;/p&gt;
+
+&lt;p&gt;我们的鸟哥在&lt;a href=&quot;http://www.laruence.com/2008/10/31/574.html&quot; &gt;关于一笔试题(Iterator模式) &lt;/a&gt;一文中分享过foreach源码实现。这边我就拿来主义了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;switch (zend_iterator_unwrap(array, &amp;amp;iter TSRMLS_CC)) {
+    default:
+        case ZEND_ITER_INVALID:
+               .....
+               break
+        case ZEND_ITER_PLAIN_OBJECT: {
+                ......
+            break;
+     case ZEND_ITER_PLAIN_ARRAY:
+            .....
+            break;
+
+        case ZEND_ITER_OBJECT:
+            ......
+            break;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体如何使用&lt;code&gt;foreach&lt;/code&gt;遍历对象，查看示例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+
+class Student{
+    private $_identityCard = &#039;360401190001011018&#039;;
+    public  $_name = &#039;三丰&#039;;
+    public  $_age  = 800;
+
+    protected $_bloodType = &#039;O&#039;;
+
+    public function __construct(){}
+}
+
+$s = new Student();
+
+foreach($s as $key =&amp;gt; $v){
+    echo &#039;key &#039;,$key ,&#039; val &#039;,$v ,&#039;&amp;lt;/br&amp;gt;&#039;;
+}
+
+//输出
+key :_name val 三丰
+key :_age val 800
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从输出的结果来看，实例化对象的所有可见(&lt;code&gt;public&lt;/code&gt;)属性都给遍历输出出来了。&lt;/p&gt;
+
+&lt;p&gt;但是，当我们需要遍历那些非可见对象属性，明显简单的使用&lt;code&gt;foreach&lt;/code&gt;遍历对象就不够用了。&lt;/p&gt;
+
+&lt;p&gt;好在PHP中有提供内置遍历接口&lt;code&gt;Iterator&lt;/code&gt; 和 &lt;code&gt;IteratorAggregate&lt;/code&gt;完成对象的遍历工作。
+关于Iterator与IteratorAggregate接口如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Iterator extends Traversable {
+    /* 方法 */
+    abstract public mixed current ( void )//返回当前元素。 
+    abstract public scalar key ( void )   //返回当前元素的键
+    abstract public void next ( void )    //移动当前位置到下一个元素
+    abstract public void rewind ( void )  //返回到迭代器的第一个元素
+    abstract public boolean valid ( void )//此方法在 Iterator::rewind() 和 Iterator::next()
+                                          //方法之后被调用以此用来检查当前位置是否有效
+}
+
+IteratorAggregate extends Traversable {
+    /* 方法 */
+    abstract public Traversable getIterator ( void )//返回一个外部迭代器
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们可以通过实现这两个迭代器接口，定义自己的对象遍历规则&lt;/p&gt;
+
+&lt;p&gt;1、通过实现IteratorAggregate接口，完成对象属性遍历&lt;/p&gt;
+
+&lt;p&gt;我们只需要实现IteratorAggregate中getIterator()方法完成遍历。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Kungfu implements IteratorAggregate{
+    public $_name=&#039;飞鸿&#039;;
+    public $_age = 121;
+
+    protected $_bloodType = &#039;O&#039;;
+    private $_isMarried = true;
+
+    public function __construct(){}
+
+    public function getIterator(){
+        $members = get_class_vars(__CLASS__);
+
+        return new ArrayIterator($members);
+    }
+}
+
+
+$k = new Kungfu();
+
+foreach($k as $key =&amp;gt; $v){
+    echo &#039;key &#039;,$key ,&#039; val &#039;,$v ,&#039;&amp;lt;/br&amp;gt;&#039;;
+}
+/*
+    key _name val 飞鸿
+    key _age val 121
+    key _bloodType val O
+    key _isMarried val 1
+*/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;2、通过实现Iterator接口，完成对象属性遍历&lt;/p&gt;
+
+&lt;p&gt;相对于&lt;code&gt;IteratorAggregate&lt;/code&gt;而言，&lt;code&gt;Iterator&lt;/code&gt;接口实现起来稍微麻烦一些，需要在实现类中实现所有5个抽象方法。&lt;/p&gt;
+
+&lt;p&gt;不过如果我们需要对迭代的对象，进行具体控制的话，使用&lt;code&gt;Iterator&lt;/code&gt;的话则更合适。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Language implements Iterator{
+    private $_lang;
+    private $_counter=0;
+
+    public function __construct(){      
+        $this-&amp;gt;_lang = explode(&#039;,&#039;, &#039;PHP,C++,C,GO,JAVA,JAVASCRIPT,RUBY,Node.js&#039;);
+    }
+
+    public function rewind(){
+        $this-&amp;gt;_counter = 0;
+    }
+
+    public function current(){
+        //当编程语言的值为JAVA时，返回空
+        if($this-&amp;gt;_lang[$this-&amp;gt;_counter] == &#039;JAVA&#039;){
+            return null;
+        }
+        return $this-&amp;gt;_lang[$this-&amp;gt;_counter];
+    }
+
+    public function valid(){
+        return isset( $this-&amp;gt;_lang[$this-&amp;gt;_counter]);
+    }
+
+    public function next(){
+        ++$this-&amp;gt;_counter;
+    }
+    public function key(){
+        return $this-&amp;gt;_counter;
+    }
+}
+
+$m = new Language();
+
+foreach($m as $key =&amp;gt; $v){
+    echo &#039;key &#039;,$key ,&#039; val &#039;,$v ,&#039;&amp;lt;/br&amp;gt;&#039;;
+}
+
+//结果输出
+key 0 val PHP
+key 1 val C++
+key 2 val C
+key 3 val GO
+key 4 val 
+key 5 val JAVASCRIPT
+key 6 val RUBY
+key 7 val Node.js
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接口&lt;code&gt;Iterator&lt;/code&gt;中抽象方法的执行顺序如下图所示：
+&lt;img src=&quot;http://huliuqing.github.io/images/post-source/2014-05-analyze-object-iterator-in-php.png&quot; title=&quot;Iterator抽象方法调用顺序&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+]]></description>
+<pubDate>2014-05-15T10:41:30+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-05-15-analyze-object-iterator-in-php.html</guid>
+<link>http://huliuqing.github.io/2014-05-15-analyze-object-iterator-in-php.html</link>
+</item>
+<item>
 <title><![CDATA[我的算法学习之路 - [转载]]]></title>
 <description><![CDATA[&lt;p&gt;原文链接：&lt;a href=&quot;http://zh.lucida.me/blog/on-learning-algorithms/&quot; target=&quot;_blank&quot;&gt;我的算法学习之路&lt;/a&gt;&lt;/p&gt;
 

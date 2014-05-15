@@ -66,6 +66,117 @@
 					</div>
 				</div><!--end/left sider-->                <div class="posts">
                                             <div class="post">
+                            <h2><a href="http://huliuqing.github.io/web-skills-me.html">个人技能一览</a></h2>
+                            <div class="post-content"><script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
+
+<p>在这边梳理一下个人所学习过，并且一直在学习的专业技能，当然还有很多没有学习到的内容。
+但在此还是写梳理出掌握的比较好。也算是对自己这3年来的一个交代吧</p>
+
+<div id="skills"></div>
+
+<script type="text/javascript">
+  // create an array with nodes
+  var nodes = [
+    {id: 1, label: '已掌握Web开发技能',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 2, label: '客户端编程'},
+    {id: 3, label: '服务器端编程'},
+    {id: 4, label: '数据库存储'},
+    {id: 5, label: 'html',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 6, label: 'css',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 7, label: 'javascript',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 8, label: '历史标准语规范'},
+    {id: 9, label: '常用标签与属性'},
+    {id: 10, label: 'DOM / BOM'},
+    {id: 11, label: '语法、继承规则'},
+    {id: 12, label: '选择器与常用属性'},
+    {id: 13, label: '基本布局与定位知识'},
+    {id: 14, label: 'css禅意花园与css实战手册'},
+    {id: 15, label: 'ajax基础知识'},
+    {id: 16, label: 'jquery基础知识'},
+    {id: 17, label: 'javascript  javascript DOM 编程艺术(2th)'},
+    {id: 18, label: '前端基础优化知识'},
+    {id: 19, label: 'PHP',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 20, label: 'HTTP',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 21, label: '知识方法与可读性',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 22, label: 'php语言 、手册核心内容阅读完'},
+    {id: 23, label: '源码阅读Zend1.0/Typecho/ucenter'},
+    {id: 24, label: '框架Zend/smarty'},
+    {id: 30, label: 'php运行时配置与性能优化'},
+    {id: 31, label: 'php生命周期与变量等内核实现'},
+    {id: 25, label: 'http基础知识'},
+    {id: 26, label: '代码可读性'},
+    {id: 27, label: 'web基础安全知识与SQL注入'},
+    {id: 28, label: '设计模式 学习中'},
+    {id: 29, label: '基础缓存策略与php调试技术手册'},
+    {id: 32, label: 'mysql数据库',color:'rgb(61,89,159)',fontColor:'#fff'},
+    {id: 33, label: 'DML/DQL/DDL'},
+    {id: 34, label: '数据类型/函数'},
+    {id: 35, label: '事务、存储过程、视图基础知识'},
+    {id: 36, label: '基础sql优化策略'},
+  ];
+
+  // create an array with edges
+  var edges = [
+    {from: 1, to: 2,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 1, to: 3,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 1, to: 4,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 2, to: 5,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 2, to: 6,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 2, to: 7,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 5, to: 8,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 5, to: 9,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 5, to: 10,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 6, to: 11,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 6, to: 12,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 6, to: 13,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 6, to: 14,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 7, to: 15,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 7, to: 16,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 7, to: 17,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 7, to: 18,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 3, to: 19,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 3, to: 20,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 3, to: 21,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 19, to: 22,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 19, to: 23,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 19, to: 24,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 19, to: 30,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 19, to: 31,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 20, to: 25,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 21, to: 26,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 21, to: 27,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 21, to: 28,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 21, to: 29,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 4, to: 32,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 32, to: 33,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 32, to: 34,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 32, to: 35,style: 'dash-line', dash: {length: 5, gap: 5}},
+    {from: 32, to: 36,style: 'dash-line', dash: {length: 5, gap: 5}}
+  ];
+
+  // create a graph
+  var container = document.getElementById('skills');
+  var data= {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+    nodes: {
+      shape: 'box'
+    },
+    edges: {
+      length: 700
+    },
+    width:'800px',
+    height:'800px'
+  };
+  var graph = new vis.Graph(container, data, options);
+</script>
+</div>
+                            <span class="post-date">2014-04-25 16:48:00</span>
+                            <span class="post-tag">介绍, 个人介绍, 柳公子, web技能</span>
+                        </div>
+                                            <div class="post">
                             <h2><a href="http://huliuqing.github.io/introduce-pmblog-lins-menus.html">PMBlog links 和menus使用介绍</a></h2>
                             <div class="post-content"><p>最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。</p>
 

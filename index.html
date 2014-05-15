@@ -66,6 +66,188 @@
 					</div>
 				</div><!--end/left sider-->                <div class="posts">
                                             <div class="post">
+                            <h2><a href="http://huliuqing.github.io/2014-05-15-analyze-object-iterator-in-php.html">详解PHP中对象属性遍历</a></h2>
+                            <div class="post-content"><h2>对象迭代</h2>
+
+<p><blockquote>
+    如未特别标明，文章均属原创。转载请注明出处 </p>
+
+<p>by : 柳公子 <a href="http://huliuqing.github.io">http://huliuqing.github.io</a>
+</blockquote></p>
+
+<p>php官网手册对于<a href="http://www.php.net/manual/zh/language.oop5.iterations.php" target="_blank">遍历对象</a>解释如下：
+<blockquote>PHP 5 提供了一种定义对象的方法使其可以通过单元列表来遍历，例如用 foreach 语句。默认情况下，所有可见属性都将被用于遍历。 </blockquote></p>
+
+<p>不过使用简单的foreach遍历对象，仅仅能够遍历出对象实例中可见（public)属性的值。</p>
+
+<p>foreach是如何实现对对象进行遍历的呢？</p>
+
+<p>我们的鸟哥在<a href="http://www.laruence.com/2008/10/31/574.html" >关于一笔试题(Iterator模式) </a>一文中分享过foreach源码实现。这边我就拿来主义了：</p>
+
+<pre><code>switch (zend_iterator_unwrap(array, &amp;iter TSRMLS_CC)) {
+    default:
+        case ZEND_ITER_INVALID:
+               .....
+               break
+        case ZEND_ITER_PLAIN_OBJECT: {
+                ......
+            break;
+     case ZEND_ITER_PLAIN_ARRAY:
+            .....
+            break;
+
+        case ZEND_ITER_OBJECT:
+            ......
+            break;
+}
+</code></pre>
+
+<p>具体如何使用<code>foreach</code>遍历对象，查看示例：</p>
+
+<pre><code>&lt;?php
+
+class Student{
+    private $_identityCard = '360401190001011018';
+    public  $_name = '三丰';
+    public  $_age  = 800;
+
+    protected $_bloodType = 'O';
+
+    public function __construct(){}
+}
+
+$s = new Student();
+
+foreach($s as $key =&gt; $v){
+    echo 'key ',$key ,' val ',$v ,'&lt;/br&gt;';
+}
+
+//输出
+key :_name val 三丰
+key :_age val 800
+</code></pre>
+
+<p>从输出的结果来看，实例化对象的所有可见(<code>public</code>)属性都给遍历输出出来了。</p>
+
+<p>但是，当我们需要遍历那些非可见对象属性，明显简单的使用<code>foreach</code>遍历对象就不够用了。</p>
+
+<p>好在PHP中有提供内置遍历接口<code>Iterator</code> 和 <code>IteratorAggregate</code>完成对象的遍历工作。
+关于Iterator与IteratorAggregate接口如下：</p>
+
+<pre><code>Iterator extends Traversable {
+    /* 方法 */
+    abstract public mixed current ( void )//返回当前元素。 
+    abstract public scalar key ( void )   //返回当前元素的键
+    abstract public void next ( void )    //移动当前位置到下一个元素
+    abstract public void rewind ( void )  //返回到迭代器的第一个元素
+    abstract public boolean valid ( void )//此方法在 Iterator::rewind() 和 Iterator::next()
+                                          //方法之后被调用以此用来检查当前位置是否有效
+}
+
+IteratorAggregate extends Traversable {
+    /* 方法 */
+    abstract public Traversable getIterator ( void )//返回一个外部迭代器
+}
+</code></pre>
+
+<p>我们可以通过实现这两个迭代器接口，定义自己的对象遍历规则</p>
+
+<p>1、通过实现IteratorAggregate接口，完成对象属性遍历</p>
+
+<p>我们只需要实现IteratorAggregate中getIterator()方法完成遍历。</p>
+
+<pre><code>class Kungfu implements IteratorAggregate{
+    public $_name='飞鸿';
+    public $_age = 121;
+
+    protected $_bloodType = 'O';
+    private $_isMarried = true;
+
+    public function __construct(){}
+
+    public function getIterator(){
+        $members = get_class_vars(__CLASS__);
+
+        return new ArrayIterator($members);
+    }
+}
+
+
+$k = new Kungfu();
+
+foreach($k as $key =&gt; $v){
+    echo 'key ',$key ,' val ',$v ,'&lt;/br&gt;';
+}
+/*
+    key _name val 飞鸿
+    key _age val 121
+    key _bloodType val O
+    key _isMarried val 1
+*/
+</code></pre>
+
+<p>2、通过实现Iterator接口，完成对象属性遍历</p>
+
+<p>相对于<code>IteratorAggregate</code>而言，<code>Iterator</code>接口实现起来稍微麻烦一些，需要在实现类中实现所有5个抽象方法。</p>
+
+<p>不过如果我们需要对迭代的对象，进行具体控制的话，使用<code>Iterator</code>的话则更合适。</p>
+
+<pre><code>class Language implements Iterator{
+    private $_lang;
+    private $_counter=0;
+
+    public function __construct(){      
+        $this-&gt;_lang = explode(',', 'PHP,C++,C,GO,JAVA,JAVASCRIPT,RUBY,Node.js');
+    }
+
+    public function rewind(){
+        $this-&gt;_counter = 0;
+    }
+
+    public function current(){
+        //当编程语言的值为JAVA时，返回空
+        if($this-&gt;_lang[$this-&gt;_counter] == 'JAVA'){
+            return null;
+        }
+        return $this-&gt;_lang[$this-&gt;_counter];
+    }
+
+    public function valid(){
+        return isset( $this-&gt;_lang[$this-&gt;_counter]);
+    }
+
+    public function next(){
+        ++$this-&gt;_counter;
+    }
+    public function key(){
+        return $this-&gt;_counter;
+    }
+}
+
+$m = new Language();
+
+foreach($m as $key =&gt; $v){
+    echo 'key ',$key ,' val ',$v ,'&lt;/br&gt;';
+}
+
+//结果输出
+key 0 val PHP
+key 1 val C++
+key 2 val C
+key 3 val GO
+key 4 val 
+key 5 val JAVASCRIPT
+key 6 val RUBY
+key 7 val Node.js
+</code></pre>
+
+<p>接口<code>Iterator</code>中抽象方法的执行顺序如下图所示：
+<img src="http://huliuqing.github.io/images/post-source/2014-05-analyze-object-iterator-in-php.png" title="Iterator抽象方法调用顺序"></img></p>
+</div>
+                            <span class="post-date">2014-05-15 10:41:30</span>
+                            <span class="post-tag">php, 对象, 遍历, Iterator, Object</span>
+                        </div>
+                                            <div class="post">
                             <h2><a href="http://huliuqing.github.io/2014-05-07-how-to-learning-algorithm-reprint.html">我的算法学习之路 - [转载]</a></h2>
                             <div class="post-content"><p>原文链接：<a href="http://zh.lucida.me/blog/on-learning-algorithms/" target="_blank">我的算法学习之路</a></p>
 
@@ -706,117 +888,6 @@ for(lpp = &amp;list; *lpp != NULL; lpp = &amp;(*lpp)-&gt;next)
 </div>
                             <span class="post-date">2014-04-28 17:13:00</span>
                             <span class="post-tag">介绍, 个人介绍, 柳公子, 书单</span>
-                        </div>
-                                            <div class="post">
-                            <h2><a href="http://huliuqing.github.io/web-skills-me.html">个人技能一览</a></h2>
-                            <div class="post-content"><script type="text/javascript" src="http://visjs.org/dist/vis.js"></script>
-
-<p>在这边梳理一下个人所学习过，并且一直在学习的专业技能，当然还有很多没有学习到的内容。
-但在此还是写梳理出掌握的比较好。也算是对自己这3年来的一个交代吧</p>
-
-<div id="skills"></div>
-
-<script type="text/javascript">
-  // create an array with nodes
-  var nodes = [
-    {id: 1, label: '已掌握Web开发技能',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 2, label: '客户端编程'},
-    {id: 3, label: '服务器端编程'},
-    {id: 4, label: '数据库存储'},
-    {id: 5, label: 'html',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 6, label: 'css',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 7, label: 'javascript',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 8, label: '历史标准语规范'},
-    {id: 9, label: '常用标签与属性'},
-    {id: 10, label: 'DOM / BOM'},
-    {id: 11, label: '语法、继承规则'},
-    {id: 12, label: '选择器与常用属性'},
-    {id: 13, label: '基本布局与定位知识'},
-    {id: 14, label: 'css禅意花园与css实战手册'},
-    {id: 15, label: 'ajax基础知识'},
-    {id: 16, label: 'jquery基础知识'},
-    {id: 17, label: 'javascript  javascript DOM 编程艺术(2th)'},
-    {id: 18, label: '前端基础优化知识'},
-    {id: 19, label: 'PHP',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 20, label: 'HTTP',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 21, label: '知识方法与可读性',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 22, label: 'php语言 、手册核心内容阅读完'},
-    {id: 23, label: '源码阅读Zend1.0/Typecho/ucenter'},
-    {id: 24, label: '框架Zend/smarty'},
-    {id: 30, label: 'php运行时配置与性能优化'},
-    {id: 31, label: 'php生命周期与变量等内核实现'},
-    {id: 25, label: 'http基础知识'},
-    {id: 26, label: '代码可读性'},
-    {id: 27, label: 'web基础安全知识与SQL注入'},
-    {id: 28, label: '设计模式 学习中'},
-    {id: 29, label: '基础缓存策略与php调试技术手册'},
-    {id: 32, label: 'mysql数据库',color:'rgb(61,89,159)',fontColor:'#fff'},
-    {id: 33, label: 'DML/DQL/DDL'},
-    {id: 34, label: '数据类型/函数'},
-    {id: 35, label: '事务、存储过程、视图基础知识'},
-    {id: 36, label: '基础sql优化策略'},
-  ];
-
-  // create an array with edges
-  var edges = [
-    {from: 1, to: 2,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 1, to: 3,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 1, to: 4,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 2, to: 5,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 2, to: 6,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 2, to: 7,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 5, to: 8,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 5, to: 9,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 5, to: 10,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 6, to: 11,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 6, to: 12,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 6, to: 13,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 6, to: 14,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 7, to: 15,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 7, to: 16,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 7, to: 17,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 7, to: 18,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 3, to: 19,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 3, to: 20,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 3, to: 21,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 19, to: 22,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 19, to: 23,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 19, to: 24,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 19, to: 30,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 19, to: 31,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 20, to: 25,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 21, to: 26,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 21, to: 27,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 21, to: 28,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 21, to: 29,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 4, to: 32,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 32, to: 33,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 32, to: 34,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 32, to: 35,style: 'dash-line', dash: {length: 5, gap: 5}},
-    {from: 32, to: 36,style: 'dash-line', dash: {length: 5, gap: 5}}
-  ];
-
-  // create a graph
-  var container = document.getElementById('skills');
-  var data= {
-    nodes: nodes,
-    edges: edges
-  };
-  var options = {
-    nodes: {
-      shape: 'box'
-    },
-    edges: {
-      length: 700
-    },
-    width:'800px',
-    height:'800px'
-  };
-  var graph = new vis.Graph(container, data, options);
-</script>
-</div>
-                            <span class="post-date">2014-04-25 16:48:00</span>
-                            <span class="post-tag">介绍, 个人介绍, 柳公子, web技能</span>
                         </div>
                     
                     <div class="pagination">
