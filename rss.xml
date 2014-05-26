@@ -6,6 +6,224 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
+<title><![CDATA[Apache Bench 工具介绍]]></title>
+<description><![CDATA[&lt;blockquote&gt;
+  &lt;p&gt;如未特别标明，文章均属原创。转载请注明出处 
+      by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io &quot;&gt;http://huliuqing.github.io &lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;apache benchmark（以下简称ab）是一款基准测试工具,用于描绘当前安装的apache服务器的执行性能,是apache安装的一部分。用户可以模拟对特定URL的任意数量请求来对Web服务器进行负载测试，观察你的apache服务器每秒可以处理多少请求。&lt;/p&gt;
+
+&lt;p&gt;ab工具提供以下信息：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;传输的总大小&lt;/li&gt;
+&lt;li&gt;Web服务器在模拟流量下每秒可以支持的请求总数&lt;/li&gt;
+&lt;li&gt;完成一个请求所花费的最长时间&lt;/li&gt;
+&lt;li&gt;完成一个请求所花费的最少时间&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;ab语法&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;ab
+    [-A auth-username:password]
+    [-c concurrency]
+    [-C cookie-name=value]
+    [-d]
+    [-e csv-file]
+    [-g gnuplot-file]
+    [-h]
+    [-H custom-header]
+    [-i]
+    [-k]
+    [-n requests]
+    [-p POST-file]
+    [-P proxy-auth-username:password]
+    [-q]
+    [-s]
+    [-S]
+    [-t timelimit]
+    [-T content-type]
+    [-v verbosity]
+    [-V]
+    [-w]
+    [-x &amp;lt;table&amp;gt;-attributes]
+    [-X proxy[:port]]
+    [-y &amp;lt;tr&amp;gt;-attributes]
+    [-z &amp;lt;td&amp;gt;-attributes]
+[http://]hostname[:port]/path
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;ab选项标记&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;-A auth-username:password 
+向服务器提供基本认证信息。用户名和密码之间由一个&quot;:&quot;隔开，并将被以base64编码形式发送。无论服务器是否需要(即是否发送了401认证需求代码)，此字符串都会被发送。 
+
+-c concurrency 
+一次产生的请求个数。默认设置为1。 
+
+-C cookie-name=value 
+对请求附加一个&quot;Cookie:&quot;头行。其典型形式是 name=value 的一个参数对。此参数可以重复。
+
+-d 
+不显示&quot;percentage served within XX [ms] table&quot;消息(为以前的版本提供支持)。 
+
+-e csv-file 
+产生一个逗号分隔(CSV)文件，该文件包含基准测试的运行结果(其中包含了处理每个相应百分比[Percentage served]请求(从1%到100%)所需要的相应百分比时间[Time in ms](以微秒为单位))。由于这种格式已经&quot;二进制化&quot;，所以比&quot;gnuplot&quot;格式更有用。 
+
+-g gnuplot-file 
+把所有测试结果写入一个&quot;gnuplot&quot;或者TSV(以Tab分隔)文件。此文件可以方便地导入到 Gnuplot, IDL, Mathematica, Excel中。其中的第一行为标题。 
+
+-h 
+显示要用于ab的选项列表。 
+
+-H custom-header 
+对请求附加额外的头信息。此参数的典型形式是一个有效的头信息行，其中包含了以冒号分隔的字段和值(如：&quot;Accept-Encoding: zip/zop;8bit&quot;)。 
+
+-i 
+执行HEAD请求，而不是默认的GET请求 。 
+
+-k 
+启用KeepAlive功能，即在一个HTTP会话中执行多个请求。默认不启用KeepAlive功能。 
+
+-n requests 
+在测试会话中所执行的请求个数。默认仅执行一个请求，此时其结果不具有意义，n值最大为50000。
+
+-p POST-file 
+包含了POST数据的文件。 
+
+-P proxy-auth-username:password 
+对一个中转代理提供基本认证信息。用户名和密码由一个&quot;:&quot;隔开，并将被以base64编码形式发送。无论服务器是否需要(即是否发送了407代理认证需求代码)，此字符串都会被发送。 
+
+-q 
+如果处理的请求数大于150，ab每处理大约10%或者100个请求时，会在stderr输出一个进度计数。此 -q 标记可以屏蔽这些信息。
+
+-s 
+用于编译中(ab -h 会告诉你)使用了SSL的受保护的https ，而不是http协议的时候。此功能是实验性的，最好不要用。 
+
+-S 
+不显示中值和标准偏差值，而且在均值和中值为标准偏差值的1到2倍时，也不显示警告或出错信息。默认时，会显示最小值/均值/最大值等数值。(为以前的版本提供支持) 
+
+-t timelimit 
+测试所进行的最大秒数。内部隐含值是&quot;-n 50000&quot;。它可以使对服务器的测试限制在一个固定的总时间以内。默认时，没有时间限制。
+
+-T content-type 
+POST数据时所使用的&quot;Content-type&quot;头信息。 
+
+-v verbosity 
+设置显示信息的详细程度，4或更大值会显示头信息，3或更大值可以显示响应代码(404，200等)，2或更大值可以显示警告和其他信息。 
+
+-V 
+显示版本号并退出。 
+
+-w 
+以HTML表格形式输出结果。默认时，它是白色背景的两列宽度的一张表。 
+
+-x &amp;lt;table&amp;gt;-attributes 
+设置&amp;lt;table&amp;gt;属性的字符串。此属性被填入&amp;lt;table 这里 &amp;gt; 。 
+
+-X proxy[:port] 
+对请求使用代理服务器。 
+
+-y &amp;lt;tr&amp;gt;-attributes 
+设置&amp;lt;tr&amp;gt;属性的字符串。 
+
+-z &amp;lt;td&amp;gt;-attributes 
+设置&amp;lt;td&amp;gt;属性的字符串。 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;运行ab工具&lt;/h2&gt;
+
+&lt;p&gt;现在我们要运行ab工具来对http://www.github.com来进行基准测试。
+运行如下命令：&lt;/p&gt;
+
+&lt;p&gt;ab -n 1 http://www.github.com/&lt;/p&gt;
+
+&lt;p&gt;输出结果如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Server Software:
+Server Hostname:        www.github.com
+Server Port:            80
+#服务器信息
+
+
+Document Path:          /
+Document Length:        0 bytes
+#文档信息
+
+
+Concurrency Level:      1
+Time taken for tests:   1.651 seconds
+Complete requests:      1
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      1
+Total transferred:      107 bytes
+HTML transferred:       0 bytes
+Requests per second:    0.61 [#/sec] (mean)
+Time per request:       1650.709 [ms] (mean)
+Time per request:       1650.709 [ms] (mean, across all concurrent requests)
+Transfer rate:          0.06 [Kbytes/sec] received
+#连接信息
+
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      862  862   0.0    862     862
+Processing:   788  788   0.0    788     788
+Waiting:      788  788   0.0    788     788
+Total:       1650 1650   0.0   1650    1650
+#连接指标分类
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;1. 服务器信息部分&lt;/h2&gt;
+
+&lt;p&gt;一般我们的Web服务器软件会是apache，那么在Server Software : 中会显示 apache : 。
+但是由于Web管理员使用安全措施，该字段可能返回其它内容或什么也不返回（如示例）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Server Hostname : 测试主机名
+Server Post : 测试主机的Web服务器监听端口号
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;2. 脚本信息部分&lt;/h2&gt;
+
+&lt;p&gt;包含基准测试主机的Web文档的信息内容&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Document Path :  包含测试请求的文档
+Document Length : 包含所有HTML 、CSS、JS、图像及其响应的其它数据的字节数总和
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;3. 链接信息部分&lt;/h2&gt;
+
+&lt;p&gt;连接数据包含基准测试信息最核心的反馈信息。
+其中最需要关心的内容部分：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    HTML transferred    整个模拟测试中传输的内容正文总大小
+    Requests per second 每秒支持的请求数
+    Time per request    满足一个请求需要花费的总时间
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;优化目标：减少HTML transferred 大小，提高Requests per second并降低Time per request值&lt;/p&gt;
+
+&lt;h2&gt;4. 连接指标分类&lt;/h2&gt;
+
+&lt;p&gt;在这一部分我们主要关注Total项目中的min : ,max : 列&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;min : 请求所花费的最短时间
+man : 请求所花费的最长时间
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;参考资料&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://apache.chinahtml.com/programs/ab.html&quot;&gt;apache 中文手册&lt;/a&gt; &lt;/p&gt;
+
+&lt;p&gt;未完待续&lt;/p&gt;
+]]></description>
+<pubDate>2014-05-26T14:51:52+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-05-26-introduce-php-test-tool-ab.html</guid>
+<link>http://huliuqing.github.io/2014-05-26-introduce-php-test-tool-ab.html</link>
+</item>
+<item>
 <title><![CDATA[详解PHP中对象属性遍历]]></title>
 <description><![CDATA[&lt;h2&gt;对象迭代&lt;/h2&gt;
 

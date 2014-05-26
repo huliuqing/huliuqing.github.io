@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>柳公子</title>
+            <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/reset.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/layout.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/main.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/font.css" media="screen" />
+            
+            <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
+            <link rel="stylesheet" type="text/css" href="http://imnerd.org/lab/pmblog/src/desert.css" />
+            <script type="text/javascript" src="http://imnerd.org/lab/pmblog/src/prettify.js"></script>
+            <link rel="stylesheet" href="http://fancyapps.com/fancybox/source/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
+            <script type="text/javascript" src="http://fancyapps.com/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="brand">
+                    <a href="http://huliuqing.github.com" class="avatar">
+                        <img src="http://huliuqing.github.io/images/header.jpg" alt="柳公子">
+                    </a>    
+                    <h1><a href="http://huliuqing.github.io">柳公子</a></h1>
+                </div>
+
+        
+                <div class="menu">  
+                    <h2>导航 / menu</h2>              
+                    <ul>        
+                                                    <li><a href="http://huliuqing.github.io/index.html "  title="首页">首页</a></li>
+                                                    <li><a href="http://huliuqing.github.io/contactme.html "  title="联系柳公子">联系我</a></li>
+                                                    <li><a href="http://huliuqing.github.io/aboutme.html "  title="关于柳公子">关于我</a></li>
+                            
+                    </ul>
+                </div>
+                <div class="search">
+                    <form>
+                        <input type="text" name="search" id="search" value="" placeholder="搜索"></input>
+                        <button id="sbutton">搜索</button>
+                    </form>
+                </div>  
+            </div><!--end / header -->
+
+            <div class="contents">    				<div class="sider">
+
+												
+					<div class="links">		
+						<h2>友链 / friend links</h2>
+						<ul>
+					        					        	<li><a href="http://stackoverflow.com/users/1969039/liuqing-hu"  title="柳公子在stackoverflow">stackoverflow</a></li>
+					        					        	<li><a href="https://github.com/huliuqing"  title="柳公子在github">github</a></li>
+					        					        	<li><a href="http://huliuqing.diandian.com "  title="柳公子在点点博客">柳公子 - 点点网</a></li>
+					        					        	<li><a href="http://weibo.com/focusliuqing"  title="柳公子在新浪微博">柳公子 - weibo</a></li>
+					              
+						</ul>
+					</div>			
+					
+					<div class="links">
+						<h2>找到我/find me</h2>		
+						<ul>
+					        <li><a href="http://huliuqing.diandian.com">柳公子点点博客</a></li>    
+					        <li><a href=" http://stackoverflow.com/users/1969039/liuqing-hu">柳公子StackOverflow</a></li>
+					        <li><a href="https://github.com/huliuqing">柳公子github</a></li>
+						</ul>
+					</div>
+				</div><!--end/left sider-->                <div class="posts">
+                    <div class="post">
+                        <h2><a href="http://huliuqing.github.io/2014-05-26-introduce-php-test-tool-ab.html">Apache Bench 工具介绍</a></h2>
+                        <div class="post-content"><blockquote>
+  <p>如未特别标明，文章均属原创。转载请注明出处 
+      by : 柳公子 <a href="http://huliuqing.github.io ">http://huliuqing.github.io </a></p>
+</blockquote>
+
+<p>apache benchmark（以下简称ab）是一款基准测试工具,用于描绘当前安装的apache服务器的执行性能,是apache安装的一部分。用户可以模拟对特定URL的任意数量请求来对Web服务器进行负载测试，观察你的apache服务器每秒可以处理多少请求。</p>
+
+<p>ab工具提供以下信息：</p>
+
+<ul>
+<li>传输的总大小</li>
+<li>Web服务器在模拟流量下每秒可以支持的请求总数</li>
+<li>完成一个请求所花费的最长时间</li>
+<li>完成一个请求所花费的最少时间</li>
+</ul>
+
+<h2>ab语法</h2>
+
+<pre><code>ab
+    [-A auth-username:password]
+    [-c concurrency]
+    [-C cookie-name=value]
+    [-d]
+    [-e csv-file]
+    [-g gnuplot-file]
+    [-h]
+    [-H custom-header]
+    [-i]
+    [-k]
+    [-n requests]
+    [-p POST-file]
+    [-P proxy-auth-username:password]
+    [-q]
+    [-s]
+    [-S]
+    [-t timelimit]
+    [-T content-type]
+    [-v verbosity]
+    [-V]
+    [-w]
+    [-x &lt;table&gt;-attributes]
+    [-X proxy[:port]]
+    [-y &lt;tr&gt;-attributes]
+    [-z &lt;td&gt;-attributes]
+[http://]hostname[:port]/path
+</code></pre>
+
+<h2>ab选项标记</h2>
+
+<pre><code>-A auth-username:password 
+向服务器提供基本认证信息。用户名和密码之间由一个":"隔开，并将被以base64编码形式发送。无论服务器是否需要(即是否发送了401认证需求代码)，此字符串都会被发送。 
+
+-c concurrency 
+一次产生的请求个数。默认设置为1。 
+
+-C cookie-name=value 
+对请求附加一个"Cookie:"头行。其典型形式是 name=value 的一个参数对。此参数可以重复。
+
+-d 
+不显示"percentage served within XX [ms] table"消息(为以前的版本提供支持)。 
+
+-e csv-file 
+产生一个逗号分隔(CSV)文件，该文件包含基准测试的运行结果(其中包含了处理每个相应百分比[Percentage served]请求(从1%到100%)所需要的相应百分比时间[Time in ms](以微秒为单位))。由于这种格式已经"二进制化"，所以比"gnuplot"格式更有用。 
+
+-g gnuplot-file 
+把所有测试结果写入一个"gnuplot"或者TSV(以Tab分隔)文件。此文件可以方便地导入到 Gnuplot, IDL, Mathematica, Excel中。其中的第一行为标题。 
+
+-h 
+显示要用于ab的选项列表。 
+
+-H custom-header 
+对请求附加额外的头信息。此参数的典型形式是一个有效的头信息行，其中包含了以冒号分隔的字段和值(如："Accept-Encoding: zip/zop;8bit")。 
+
+-i 
+执行HEAD请求，而不是默认的GET请求 。 
+
+-k 
+启用KeepAlive功能，即在一个HTTP会话中执行多个请求。默认不启用KeepAlive功能。 
+
+-n requests 
+在测试会话中所执行的请求个数。默认仅执行一个请求，此时其结果不具有意义，n值最大为50000。
+
+-p POST-file 
+包含了POST数据的文件。 
+
+-P proxy-auth-username:password 
+对一个中转代理提供基本认证信息。用户名和密码由一个":"隔开，并将被以base64编码形式发送。无论服务器是否需要(即是否发送了407代理认证需求代码)，此字符串都会被发送。 
+
+-q 
+如果处理的请求数大于150，ab每处理大约10%或者100个请求时，会在stderr输出一个进度计数。此 -q 标记可以屏蔽这些信息。
+
+-s 
+用于编译中(ab -h 会告诉你)使用了SSL的受保护的https ，而不是http协议的时候。此功能是实验性的，最好不要用。 
+
+-S 
+不显示中值和标准偏差值，而且在均值和中值为标准偏差值的1到2倍时，也不显示警告或出错信息。默认时，会显示最小值/均值/最大值等数值。(为以前的版本提供支持) 
+
+-t timelimit 
+测试所进行的最大秒数。内部隐含值是"-n 50000"。它可以使对服务器的测试限制在一个固定的总时间以内。默认时，没有时间限制。
+
+-T content-type 
+POST数据时所使用的"Content-type"头信息。 
+
+-v verbosity 
+设置显示信息的详细程度，4或更大值会显示头信息，3或更大值可以显示响应代码(404，200等)，2或更大值可以显示警告和其他信息。 
+
+-V 
+显示版本号并退出。 
+
+-w 
+以HTML表格形式输出结果。默认时，它是白色背景的两列宽度的一张表。 
+
+-x &lt;table&gt;-attributes 
+设置&lt;table&gt;属性的字符串。此属性被填入&lt;table 这里 &gt; 。 
+
+-X proxy[:port] 
+对请求使用代理服务器。 
+
+-y &lt;tr&gt;-attributes 
+设置&lt;tr&gt;属性的字符串。 
+
+-z &lt;td&gt;-attributes 
+设置&lt;td&gt;属性的字符串。 
+</code></pre>
+
+<h2>运行ab工具</h2>
+
+<p>现在我们要运行ab工具来对http://www.github.com来进行基准测试。
+运行如下命令：</p>
+
+<p>ab -n 1 http://www.github.com/</p>
+
+<p>输出结果如下</p>
+
+<pre><code>Server Software:
+Server Hostname:        www.github.com
+Server Port:            80
+#服务器信息
+
+
+Document Path:          /
+Document Length:        0 bytes
+#文档信息
+
+
+Concurrency Level:      1
+Time taken for tests:   1.651 seconds
+Complete requests:      1
+Failed requests:        0
+Write errors:           0
+Non-2xx responses:      1
+Total transferred:      107 bytes
+HTML transferred:       0 bytes
+Requests per second:    0.61 [#/sec] (mean)
+Time per request:       1650.709 [ms] (mean)
+Time per request:       1650.709 [ms] (mean, across all concurrent requests)
+Transfer rate:          0.06 [Kbytes/sec] received
+#连接信息
+
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      862  862   0.0    862     862
+Processing:   788  788   0.0    788     788
+Waiting:      788  788   0.0    788     788
+Total:       1650 1650   0.0   1650    1650
+#连接指标分类
+</code></pre>
+
+<h2>1. 服务器信息部分</h2>
+
+<p>一般我们的Web服务器软件会是apache，那么在Server Software : 中会显示 apache : 。
+但是由于Web管理员使用安全措施，该字段可能返回其它内容或什么也不返回（如示例）</p>
+
+<pre><code>Server Hostname : 测试主机名
+Server Post : 测试主机的Web服务器监听端口号
+</code></pre>
+
+<h2>2. 脚本信息部分</h2>
+
+<p>包含基准测试主机的Web文档的信息内容</p>
+
+<pre><code>Document Path :  包含测试请求的文档
+Document Length : 包含所有HTML 、CSS、JS、图像及其响应的其它数据的字节数总和
+</code></pre>
+
+<h2>3. 链接信息部分</h2>
+
+<p>连接数据包含基准测试信息最核心的反馈信息。
+其中最需要关心的内容部分：</p>
+
+<pre><code>    HTML transferred    整个模拟测试中传输的内容正文总大小
+    Requests per second 每秒支持的请求数
+    Time per request    满足一个请求需要花费的总时间
+</code></pre>
+
+<p>优化目标：减少HTML transferred 大小，提高Requests per second并降低Time per request值</p>
+
+<h2>4. 连接指标分类</h2>
+
+<p>在这一部分我们主要关注Total项目中的min : ,max : 列</p>
+
+<pre><code>min : 请求所花费的最短时间
+man : 请求所花费的最长时间
+</code></pre>
+
+<h2>参考资料</h2>
+
+<p><a href="http://apache.chinahtml.com/programs/ab.html">apache 中文手册</a> </p>
+
+<p>未完待续</p>
+</div>
+                        <span class="post-date">2014-05-26 14:51:52</span>
+                        <span class="post-tag">
+                                                        <a href="http://huliuqing.github.io/tag/php">php</a> 
+                                                        <a href="http://huliuqing.github.io/tag/apache">apache</a> 
+                                                        <a href="http://huliuqing.github.io/tag/压力测试">压力测试</a> 
+                                                        <a href="http://huliuqing.github.io/tag/工具">工具</a> 
+                                                    </span>
+                        
+                        <!-- open 3td party comment service-->
+                        <div class="comments-thread">
+                         <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'phpnote'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <ul>
+                            
+                                                    </ul>
+                    </div>
+                </div><!--end/posts-->
+
+			</div><!--end /contents-->
+
+			<div class="footer">
+				<div class="social span3">
+					<h3>关注我</h3>
+					<ul>
+						<li><a class="glyph" href="" title=""><i class="icon-weibo"></i></a></li>
+						<li><a class="glyph" href="" title="点点网博客"> 点点网</a></li>
+						<li><a class="glyph" href="" title="柳公子的gmail邮箱"> stackoverflow</a></li>
+					</ul>
+				</div>				
+				<div class="list span3">
+					<h3>我的博客</h3>
+					<ul>
+			        	<li><a href="http://stackoverflow.com/users/1969039/liuqing-hu" title="柳公子在stackoverflow">stackoverflow</a></li>
+			        	<li><a href="https://github.com/huliuqing" title="柳公子在github" >github</a></li>
+			        	<li><a href="http://huliuqing.diandian.com" title="柳公子在点点博客">柳公子 - 点点网</a></li>
+			        	<li><a href="http://weibo.com/focusliuqing" title="柳公子在新浪微博">柳公子 - weibo</a></li>
+					              
+					</ul>
+				</div>	
+
+				<div class="list span3">
+					<h3>主题</h3>
+					<ul>
+						<li>社交图标 by <a href="https://github.com/lexrus/fontdiao" title="fontdiao"> fontdiao</a></li>
+						<li>主题 by <a href="https://huliuqing.github.io" title="柳公子">柳公子</a></li>
+					</ul>
+				</div>
+			</div><!--end/footer-->
+		</div><!--end/wrapper-->
+	</body>	
+	
+	<script type="text/javascript">
+	var s=document.getElementById('search'), b=document.getElementById('sbutton');
+	b.onclick = function() {
+		if(s.value != '') {
+			window.open("https://www.google.com.hk/#q=site:http://huliuqing.github.io "+s.value);
+		} else {
+			alert('请输入搜索内容');
+		}
+	}	
+	</script>
+	
+	<script type="text/javascript">
+	$(function () {
+		$("pre").addClass("prettyprint linenums");
+		prettyPrint();
+	})
+	</script>
+
+</html>
