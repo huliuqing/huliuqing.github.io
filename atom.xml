@@ -4,10 +4,98 @@
   <title><![CDATA[]]></title>
   <link href="/atom.xml" rel="self"/>
   <link href="/"/>
-  <updated>2014-05-26T17:31:23+08:00</updated>
+  <updated>2014-05-27T11:18:26+08:00</updated>
   <id>/</id>
   <generator uri="http://gitcafe.com/lizheming/pmblog">PMBlog</generator>
 
+    <entry>
+    <title type="html"><![CDATA[如何优化PHP网站[译]]]></title>
+    <link href="http://huliuqing.github.io/2014-05-26-translate-PHP-website-optimization.html"/>
+    <id>http://huliuqing.github.io/2014-05-26-translate-PHP-website-optimization.html</id>
+    <updated>2014-05-26T18:00:00+08:00</updated>
+    <content type="html"><![CDATA[<p>转载请注明出处</p>
+
+<p>这是一篇翻译自stackOverflow的文章，由于水平有限难免出错，如果您在阅读的时候发现了，请帮我更正。</p>
+
+<h2>如何优化PHP网站</h2>
+
+<p>问题如下（原文：<a href="http://stackoverflow.com/questions/8258567/php-website-optimization/8259911#8259911">PHP website Optimization</a>）：
+    我拥有一个高访问量的网站，需要保证每个访问我站点的用户，都能够在最短的时间内显示出他们请求的页面。
+    我通过Google搜索大量关于网站访问速度和优化方法的文章，并得出如下几个方案：</p>
+
+<pre><code>    1. 对页面缓存
+        通过对页面缓存，我可以让访问更加快速。但是如果我变更了页面的内容，我则必须把页面的内容从缓存中删除并重新对文件进行缓存。
+    2. 页面静态化（把页面保存在磁盘中）
+        通过页面静态化，我可以比较简单的对它进行维护。只是这样的话我必须每次访问它所在的目录来进行维护工作。
+</code></pre>
+
+<p>那么究竟如何才能够达到我想要的目的呢？</p>
+
+<h2>------------------------------------------------------------------------------------------</h2>
+
+<h2>来自Book Of Zeus的回答:</h2>
+
+<p><a href="http://stackoverflow.com/a/8259911/3675700">Book Of Zeus</a></p>
+
+<p>对于网站的性能来说，当我们需要获取静态或动态的内容时，减少访问数据库或文件系统的请求数，启用缓存（缓存页面或部分内容）是很重要的一个环节。</p>
+
+<p>在运行动态内容的时候，我们可以使用加速PHP处理的软件：</p>
+
+<p>（一）在这我推荐使用Alternative PHP Cache(<a href="http://php.net/manual/en/book.apc.php">通过手册了解更多关于APC信息</a>)。</p>
+
+<p>推荐几篇关于APC的好文章给你：</p>
+
+<ol>
+<li><p>1.<a href="http://agilewebmasters.com/robert/what-is-the-best-php-accelerator-to-use/">What is the best PHP accelerator to use?
+</a></p></li>
+<li><p>2.<a href="http://blog.digitalstruct.com/2007/12/23/php-accelerators-apc-vs-zend-vs-xcache-with-zend-framework/">PHP Accelerators : APC vs Zend vs XCache with Zend Framework</a></p></li>
+<li><p>3.<a href="http://blog.bodhizazen.net/linux/lighttpd-php-acceleration-benchmarks/">Lighttpd – PHP Acceleration Benchmarks</a></p></li>
+</ol>
+
+<p>（二）如果是缓存内容或整个页面的话，最好使用<a href="http://memcached.org">Memcached</a> 或 <a href="http://redis.io">Redis</a>进行缓存。</p>
+
+<ol>
+<li><p>1.<code>memcached</code>
+一个高性能的分布式内存对象缓存开源系统。用于降低数据库负载，提升动态web程序的访问速度。memcached是通过把从数据库中返回的结果集、调用API返回的结果集或者呈现的页面。在内存中以键值对的形式进行缓存。</p></li>
+<li><p>2.<code>Redis</code>
+一款高性能键值对存储数据库开源项目。当值为字符，哈希表，列表，集合或排序集合时，它被视作一种数据结构服务程序。</p></li>
+</ol>
+
+<p>这两个(Memcached和Redis)项目都是用于缓存内容和变量的绝好工具。</p>
+
+<p>推荐几篇有关Memcached和Redis的相关文章：</p>
+
+<ol>
+<li><p>1.<a href="http://trespams.com/2011/08/05/redis-vs-memcached-en/">Redis vs Memcached</a></p></li>
+<li><p>2.<a href="On Redis, Memcached, Speed, Benchmarks and The Toilet">On Redis, Memcached, Speed, Benchmarks and The Toilet</a></p></li>
+<li><p>3.<a href="http://systoilet.wordpress.com/2010/08/09/redis-vs-memcached/">Redis vs Memcached</a></p></li>
+<li><p>4.<a href="http://dormando.livejournal.com/525147.html">Redis VS Memcached (slightly better bench)</a></p></li>
+</ol>
+
+<p>（三）使用varnish，nginx或G-Wan</p>
+
+<ol>
+<li><p>1.<code>Varnish</code>
+一款专为有大量动态内容web网站设计的HTTP加速器。与其它HTTP加速器相比，如squid在客户端缓存;Apache则仅仅是服务器软件。Varnish则一开始就被设计成为HTTP加速器。</p></li>
+<li><p>2.<code>Nginx</code>
+是一款由俄罗斯程序员Igor Sysoev所开发轻量级的网页服务器、反向代理服务器以及电子邮件（IMAP/POP3）代理服务器。起初是供俄国大型的门户网站及搜索引擎Rambler（俄语：Рамблер）使用。此软件BSD-like协议下发行，可以在UNIX、GNU/Linux、BSD、Mac OS X、Solaris，以及Microsoft Windows等操作系统中运行</p></li>
+<li><p>3.<code>g-wan</code>
+C编写的Web服务器，比其它采用键值对存储的解决方案更加快速</p></li>
+</ol>
+
+<p>一些文章：   </p>
+
+<ol>
+<li><p>1.<a href="http://nbonvin.wordpress.com/2011/03/14/apache-vs-nginx-vs-varnish-vs-gwan/">Serving static files: a comparison between Apache, Nginx, Varnish and G-WAN</a></p></li>
+<li><p>2.<a href="http://loadstorm.com/2011/05/web-server-performance-benchmarks/">Web Server Performance Benchmarks</a></p></li>
+<li><p>3.<a href="http://www.garron.me/en/go2linux/nginx-varnish-vs-nginx-alone-compared.html">Nginx+Varnish compared to Nginx</a></p></li>
+<li><p>4.<a href="http://cd34.com/blog/infrastructure/apache-varnish-nginx-and-lighttpd/">Apache, Varnish, nginx and lighttpd</a></p></li>
+<li><p>5.<a href="http://www.wikivs.com/wiki/G-WAN_vs_Nginx">G-WAN vs Nginx</a></p></li>
+</ol>
+
+<p>(to be continued)</p>
+]]></content>
+  </entry>
     <entry>
     <title type="html"><![CDATA[Apache Bench 工具介绍]]></title>
     <link href="http://huliuqing.github.io/2014-05-26-introduce-php-test-tool-ab.html"/>
@@ -63,7 +151,8 @@
 <h2>ab选项标记</h2>
 
 <pre><code>-A auth-username:password 
-向服务器提供基本认证信息。用户名和密码之间由一个":"隔开，并将被以base64编码形式发送。无论服务器是否需要(即是否发送了401认证需求代码)，此字符串都会被发送。 
+向服务器提供基本认证信息。用户名和密码之间由一个":"隔开，并将被以base64编码形式发送。无论
+服务器是否需要(即是否发送了401认证需求代码)，此字符串都会被发送。 
 
 -c concurrency 
 一次产生的请求个数。默认设置为1。 
@@ -75,16 +164,20 @@
 不显示"percentage served within XX [ms] table"消息(为以前的版本提供支持)。 
 
 -e csv-file 
-产生一个逗号分隔(CSV)文件，该文件包含基准测试的运行结果(其中包含了处理每个相应百分比[Percentage served]请求(从1%到100%)所需要的相应百分比时间[Time in ms](以微秒为单位))。由于这种格式已经"二进制化"，所以比"gnuplot"格式更有用。 
+产生一个逗号分隔(CSV)文件，该文件包含基准测试的运行结果(其中包含了处理每个相应
+百分比[Percentage served]请求(从1%到100%)所需要的相应百分比时间[Time in ms](以微
+秒为单位))。由于这种格式已经"二进制化"，所以比"gnuplot"格式更有用。 
 
 -g gnuplot-file 
-把所有测试结果写入一个"gnuplot"或者TSV(以Tab分隔)文件。此文件可以方便地导入到 Gnuplot, IDL, Mathematica, Excel中。其中的第一行为标题。 
+把所有测试结果写入一个"gnuplot"或者TSV(以Tab分隔)文件。此文件可以方便地导入到 Gnuplot,
+IDL, Mathematica, Excel中。其中的第一行为标题。 
 
 -h 
 显示要用于ab的选项列表。 
 
 -H custom-header 
-对请求附加额外的头信息。此参数的典型形式是一个有效的头信息行，其中包含了以冒号分隔的字段和值(如："Accept-Encoding: zip/zop;8bit")。 
+对请求附加额外的头信息。此参数的典型形式是一个有效的头信息行，其中包含了以冒号分隔的字段
+和值(如："Accept-Encoding: zip/zop;8bit")。 
 
 -i 
 执行HEAD请求，而不是默认的GET请求 。 
@@ -99,16 +192,19 @@
 包含了POST数据的文件。 
 
 -P proxy-auth-username:password 
-对一个中转代理提供基本认证信息。用户名和密码由一个":"隔开，并将被以base64编码形式发送。无论服务器是否需要(即是否发送了407代理认证需求代码)，此字符串都会被发送。 
+对一个中转代理提供基本认证信息。用户名和密码由一个":"隔开，并将被以base64编码形式发送。
+无论服务器是否需要(即是否发送了407代理认证需求代码)，此字符串都会被发送。 
 
 -q 
-如果处理的请求数大于150，ab每处理大约10%或者100个请求时，会在stderr输出一个进度计数。此 -q 标记可以屏蔽这些信息。
+如果处理的请求数大于150，ab每处理大约10%或者100个请求时，会在stderr输出一个进度计数。此 
+-q 标记可以屏蔽这些信息。
 
 -s 
 用于编译中(ab -h 会告诉你)使用了SSL的受保护的https ，而不是http协议的时候。此功能是实验性的，最好不要用。 
 
 -S 
-不显示中值和标准偏差值，而且在均值和中值为标准偏差值的1到2倍时，也不显示警告或出错信息。默认时，会显示最小值/均值/最大值等数值。(为以前的版本提供支持) 
+不显示中值和标准偏差值，而且在均值和中值为标准偏差值的1到2倍时，也不显示警告或出错信息。
+默认时，会显示最小值/均值/最大值等数值。(为以前的版本提供支持) 
 
 -t timelimit 
 测试所进行的最大秒数。内部隐含值是"-n 50000"。它可以使对服务器的测试限制在一个固定的总时间以内。默认时，没有时间限制。
