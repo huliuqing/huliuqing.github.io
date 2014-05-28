@@ -4,10 +4,120 @@
   <title><![CDATA[]]></title>
   <link href="/atom.xml" rel="self"/>
   <link href="/"/>
-  <updated>2014-05-27T11:18:26+08:00</updated>
+  <updated>2014-05-28T10:51:33+08:00</updated>
   <id>/</id>
   <generator uri="http://gitcafe.com/lizheming/pmblog">PMBlog</generator>
 
+    <entry>
+    <title type="html"><![CDATA[memcache缓存处理简介]]></title>
+    <link href="http://huliuqing.github.io/2014-05-27-install-memcache-in-php.html"/>
+    <id>http://huliuqing.github.io/2014-05-27-install-memcache-in-php.html</id>
+    <updated>2014-05-27T17:55:00+08:00</updated>
+    <content type="html"><![CDATA[<blockquote>
+  <p>如未特别标明，文章均属原创。转载请注明出处。by : 柳公子 <a href="http://huliuqing.github.io">http://huliuqing.github.io</a></p>
+</blockquote>
+
+<p>进行PHP开发工作3年，直到最近才更专注的去思考关于PHP项目性能问题（一直以来有去了解，但并未深入的去学习）。这篇文章简单讲解在windows平台下PHP开发中，安装和使用memcached缓存系统。</p>
+
+<p>先来看看维基百科关于<a href="http://zh.wikipedia.org/wiki/Memcached" target="_blank">memcached</a>的解释：</p>
+
+<blockquote>
+  <p>memcached是一套分布式的高速缓存系统，由LiveJournal的Brad Fitzpatrick开发，但目前被许多网站使用。这是一套开放源代码软件，以BSD license授权发布。
+  ...
+  memcached的API使用三十二比特的循环冗余校验（CRC-32）计算键值后，将数据分散在不同的机器上。当表格满了以后，接下来新增的数据会以LRU机制替换掉。由于memcached通常只是当作高速缓存系统使用，所以使用memcached的应用程序在写回较慢的系统时（像是后端的数据库）需要额外的代码更新memcached内的数据。</p>
+</blockquote>
+
+<p>感觉很高端的样子，简单来说<code>memcached</code>是一套分布式的内存对象缓存系统，<code>Key/Value</code>值对以Hashmap方式缓存到内存中，以降低Web应用对数据库、文件读取的压力。</p>
+
+<h2>memcached缓存系统组成</h2>
+
+<p>一）  memcached服务守护程序</p>
+
+<p>服务器守护程序是用C编写的，为客户端程序提供服务。<a href="http://code.jellycan.com/files/memcached-1.2.6-win32-bin.zip">点这里下载</a></p>
+
+<p>二）  memcache客户端程序</p>
+
+<p>客户端程序可以是任意语言编写的，通过memcached协议与守护程序通信。我们这下载PHP开发相关的版本。<a href="http://downloads.php.net/pierre/" target="_blank">到这里去下载</a></p>
+
+<h2>memcached服务守护程序安装</h2>
+
+<ol>
+<li><p>1.下载memcached服务器程序,获取memcached.exe文件。<a href="http://code.jellycan.com/files/memcached-1.2.6-win32-bin.zip">点这里下载</a></p></li>
+<li><p>2.进入命令行模式，使用命令安装memcached
+c:/memcached/memcached.exe -d install</p></li>
+<li><p>3.启动服务
+c:/memcached/memcached.exe -d start</p></li>
+</ol>
+
+<p>默认情况下memcached服务器程序监听<code>11211</code>端口,并指定缓存使用的最大内存为<code>64MB</code>。</p>
+
+<p>常用memcached选项参数</p>
+
+<pre><code>-m 指定缓存所使用的最大内存容量，单位是Megabytes，默认是64MB
+-u 只有以root身份运行时才指定该参数
+-d 以daemon的形式运行
+-l 指定监听的地址
+-p 指定监听的TCP端口号，默认是11211
+
+//"-d"参数更多选项值
+-d install 安装memcached
+-d uninstall 卸载memcached
+-d start 启动memcached服务
+-d restart 重启memcached服务
+-d stop 停止memcached服务
+-d shutdown 停止memcached服务
+</code></pre>
+
+<p>更多memcached选项参数，<a href="http://works.jinbuguo.com/man/memcached.html">点这里去了解</a></p>
+
+<h2>memcache客户端安装</h2>
+
+<p>如果使用XAMPP/WAMP集成开发环境，我们仅需下载php_memcache扩展程序。</p>
+
+<ol>
+<li><p>1.下载dll扩展程序（<a href="http://downloads.php.net/pierre/" target="_blank">到这里去下载</a>）,放于c:/xampp/php/ext/目录下。</p></li>
+<li><p>2.开启扩展服务。
+进入php.ini文件添加如下<code>extension=php_memcache.dll</code></p></li>
+<li><p>3.重新启动XAMPP/WAMP</p></li>
+</ol>
+
+<h2>使用memcache缓存</h2>
+
+<p>超简单示例：</p>
+
+<pre><code>&lt;?php
+$memcache = new Memcache;
+
+$memcache-&gt;connect('127.0.0.1',11211);
+$memcache-&gt;add('name','柳公子');
+$name = $memcache-&gt;get('name');
+
+echo $name;
+</code></pre>
+
+<p>进入官网手册，了解更多关于<a href="http://cn2.php.net/manual/zh/book.memcache.php">memcache</a>相关信息</p>
+
+<h2>工具</h2>
+
+<p><a href="http://www.junopen.com/memadmin/" target="_blank">memcache监控程序</a></p>
+
+<p>参考资料：</p>
+
+<p><a href="http://works.jinbuguo.com/man/memcached.html">memcache手册中文</a></p>
+
+<p><a href="http://www.codeforest.net/how-to-install-memcached-on-windows-machine">How to install Memcached on Windows machine</a></p>
+
+<p><a href="http://blog.csdn.net/poechant/article/details/7074257">Memcached基础及示例程序</a></p>
+
+<p><a href="http://blog.csdn.net/poechant/article/details/7082115">Memcached配置参数初解</a></p>
+
+<p><a href="http://zh.wikipedia.org/wiki/Memcached">维基百科：memcached</a></p>
+
+<p><a href="http://baike.baidu.com/view/794242.htm">百度百科：memcached</a></p>
+
+<p><a href="http://cn2.php.net/manual/zh/book.memcache.php">手册：memcached</a></p>
+]]></content>
+  </entry>
     <entry>
     <title type="html"><![CDATA[如何优化PHP网站[译]]]></title>
     <link href="http://huliuqing.github.io/2014-05-26-translate-PHP-website-optimization.html"/>

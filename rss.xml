@@ -6,6 +6,116 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
+<title><![CDATA[memcache缓存处理简介]]></title>
+<description><![CDATA[&lt;blockquote&gt;
+  &lt;p&gt;如未特别标明，文章均属原创。转载请注明出处。by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;进行PHP开发工作3年，直到最近才更专注的去思考关于PHP项目性能问题（一直以来有去了解，但并未深入的去学习）。这篇文章简单讲解在windows平台下PHP开发中，安装和使用memcached缓存系统。&lt;/p&gt;
+
+&lt;p&gt;先来看看维基百科关于&lt;a href=&quot;http://zh.wikipedia.org/wiki/Memcached&quot; target=&quot;_blank&quot;&gt;memcached&lt;/a&gt;的解释：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;memcached是一套分布式的高速缓存系统，由LiveJournal的Brad Fitzpatrick开发，但目前被许多网站使用。这是一套开放源代码软件，以BSD license授权发布。
+  ...
+  memcached的API使用三十二比特的循环冗余校验（CRC-32）计算键值后，将数据分散在不同的机器上。当表格满了以后，接下来新增的数据会以LRU机制替换掉。由于memcached通常只是当作高速缓存系统使用，所以使用memcached的应用程序在写回较慢的系统时（像是后端的数据库）需要额外的代码更新memcached内的数据。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;感觉很高端的样子，简单来说&lt;code&gt;memcached&lt;/code&gt;是一套分布式的内存对象缓存系统，&lt;code&gt;Key/Value&lt;/code&gt;值对以Hashmap方式缓存到内存中，以降低Web应用对数据库、文件读取的压力。&lt;/p&gt;
+
+&lt;h2&gt;memcached缓存系统组成&lt;/h2&gt;
+
+&lt;p&gt;一）  memcached服务守护程序&lt;/p&gt;
+
+&lt;p&gt;服务器守护程序是用C编写的，为客户端程序提供服务。&lt;a href=&quot;http://code.jellycan.com/files/memcached-1.2.6-win32-bin.zip&quot;&gt;点这里下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;二）  memcache客户端程序&lt;/p&gt;
+
+&lt;p&gt;客户端程序可以是任意语言编写的，通过memcached协议与守护程序通信。我们这下载PHP开发相关的版本。&lt;a href=&quot;http://downloads.php.net/pierre/&quot; target=&quot;_blank&quot;&gt;到这里去下载&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;memcached服务守护程序安装&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;1.下载memcached服务器程序,获取memcached.exe文件。&lt;a href=&quot;http://code.jellycan.com/files/memcached-1.2.6-win32-bin.zip&quot;&gt;点这里下载&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.进入命令行模式，使用命令安装memcached
+c:/memcached/memcached.exe -d install&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;3.启动服务
+c:/memcached/memcached.exe -d start&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;默认情况下memcached服务器程序监听&lt;code&gt;11211&lt;/code&gt;端口,并指定缓存使用的最大内存为&lt;code&gt;64MB&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;常用memcached选项参数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-m 指定缓存所使用的最大内存容量，单位是Megabytes，默认是64MB
+-u 只有以root身份运行时才指定该参数
+-d 以daemon的形式运行
+-l 指定监听的地址
+-p 指定监听的TCP端口号，默认是11211
+
+//&quot;-d&quot;参数更多选项值
+-d install 安装memcached
+-d uninstall 卸载memcached
+-d start 启动memcached服务
+-d restart 重启memcached服务
+-d stop 停止memcached服务
+-d shutdown 停止memcached服务
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更多memcached选项参数，&lt;a href=&quot;http://works.jinbuguo.com/man/memcached.html&quot;&gt;点这里去了解&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;memcache客户端安装&lt;/h2&gt;
+
+&lt;p&gt;如果使用XAMPP/WAMP集成开发环境，我们仅需下载php_memcache扩展程序。&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;1.下载dll扩展程序（&lt;a href=&quot;http://downloads.php.net/pierre/&quot; target=&quot;_blank&quot;&gt;到这里去下载&lt;/a&gt;）,放于c:/xampp/php/ext/目录下。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.开启扩展服务。
+进入php.ini文件添加如下&lt;code&gt;extension=php_memcache.dll&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;3.重新启动XAMPP/WAMP&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;使用memcache缓存&lt;/h2&gt;
+
+&lt;p&gt;超简单示例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+$memcache = new Memcache;
+
+$memcache-&amp;gt;connect(&#039;127.0.0.1&#039;,11211);
+$memcache-&amp;gt;add(&#039;name&#039;,&#039;柳公子&#039;);
+$name = $memcache-&amp;gt;get(&#039;name&#039;);
+
+echo $name;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进入官网手册，了解更多关于&lt;a href=&quot;http://cn2.php.net/manual/zh/book.memcache.php&quot;&gt;memcache&lt;/a&gt;相关信息&lt;/p&gt;
+
+&lt;h2&gt;工具&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.junopen.com/memadmin/&quot; target=&quot;_blank&quot;&gt;memcache监控程序&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参考资料：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://works.jinbuguo.com/man/memcached.html&quot;&gt;memcache手册中文&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.codeforest.net/how-to-install-memcached-on-windows-machine&quot;&gt;How to install Memcached on Windows machine&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/poechant/article/details/7074257&quot;&gt;Memcached基础及示例程序&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/poechant/article/details/7082115&quot;&gt;Memcached配置参数初解&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://zh.wikipedia.org/wiki/Memcached&quot;&gt;维基百科：memcached&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://baike.baidu.com/view/794242.htm&quot;&gt;百度百科：memcached&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://cn2.php.net/manual/zh/book.memcache.php&quot;&gt;手册：memcached&lt;/a&gt;&lt;/p&gt;
+]]></description>
+<pubDate>2014-05-27T17:55:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-05-27-install-memcache-in-php.html</guid>
+<link>http://huliuqing.github.io/2014-05-27-install-memcache-in-php.html</link>
+</item>
+<item>
 <title><![CDATA[如何优化PHP网站[译]]]></title>
 <description><![CDATA[&lt;p&gt;转载请注明出处&lt;/p&gt;
 

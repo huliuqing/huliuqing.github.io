@@ -66,6 +66,115 @@
 					</div>
 				</div><!--end/left sider-->                <div class="posts">
                                             <div class="post">
+                            <h2><a href="http://huliuqing.github.io/2014-05-27-install-memcache-in-php.html">memcache缓存处理简介</a></h2>
+                            <div class="post-content"><blockquote>
+  <p>如未特别标明，文章均属原创。转载请注明出处。by : 柳公子 <a href="http://huliuqing.github.io">http://huliuqing.github.io</a></p>
+</blockquote>
+
+<p>进行PHP开发工作3年，直到最近才更专注的去思考关于PHP项目性能问题（一直以来有去了解，但并未深入的去学习）。这篇文章简单讲解在windows平台下PHP开发中，安装和使用memcached缓存系统。</p>
+
+<p>先来看看维基百科关于<a href="http://zh.wikipedia.org/wiki/Memcached" target="_blank">memcached</a>的解释：</p>
+
+<blockquote>
+  <p>memcached是一套分布式的高速缓存系统，由LiveJournal的Brad Fitzpatrick开发，但目前被许多网站使用。这是一套开放源代码软件，以BSD license授权发布。
+  ...
+  memcached的API使用三十二比特的循环冗余校验（CRC-32）计算键值后，将数据分散在不同的机器上。当表格满了以后，接下来新增的数据会以LRU机制替换掉。由于memcached通常只是当作高速缓存系统使用，所以使用memcached的应用程序在写回较慢的系统时（像是后端的数据库）需要额外的代码更新memcached内的数据。</p>
+</blockquote>
+
+<p>感觉很高端的样子，简单来说<code>memcached</code>是一套分布式的内存对象缓存系统，<code>Key/Value</code>值对以Hashmap方式缓存到内存中，以降低Web应用对数据库、文件读取的压力。</p>
+
+<h2>memcached缓存系统组成</h2>
+
+<p>一）  memcached服务守护程序</p>
+
+<p>服务器守护程序是用C编写的，为客户端程序提供服务。<a href="http://code.jellycan.com/files/memcached-1.2.6-win32-bin.zip">点这里下载</a></p>
+
+<p>二）  memcache客户端程序</p>
+
+<p>客户端程序可以是任意语言编写的，通过memcached协议与守护程序通信。我们这下载PHP开发相关的版本。<a href="http://downloads.php.net/pierre/" target="_blank">到这里去下载</a></p>
+
+<h2>memcached服务守护程序安装</h2>
+
+<ol>
+<li><p>1.下载memcached服务器程序,获取memcached.exe文件。<a href="http://code.jellycan.com/files/memcached-1.2.6-win32-bin.zip">点这里下载</a></p></li>
+<li><p>2.进入命令行模式，使用命令安装memcached
+c:/memcached/memcached.exe -d install</p></li>
+<li><p>3.启动服务
+c:/memcached/memcached.exe -d start</p></li>
+</ol>
+
+<p>默认情况下memcached服务器程序监听<code>11211</code>端口,并指定缓存使用的最大内存为<code>64MB</code>。</p>
+
+<p>常用memcached选项参数</p>
+
+<pre><code>-m 指定缓存所使用的最大内存容量，单位是Megabytes，默认是64MB
+-u 只有以root身份运行时才指定该参数
+-d 以daemon的形式运行
+-l 指定监听的地址
+-p 指定监听的TCP端口号，默认是11211
+
+//"-d"参数更多选项值
+-d install 安装memcached
+-d uninstall 卸载memcached
+-d start 启动memcached服务
+-d restart 重启memcached服务
+-d stop 停止memcached服务
+-d shutdown 停止memcached服务
+</code></pre>
+
+<p>更多memcached选项参数，<a href="http://works.jinbuguo.com/man/memcached.html">点这里去了解</a></p>
+
+<h2>memcache客户端安装</h2>
+
+<p>如果使用XAMPP/WAMP集成开发环境，我们仅需下载php_memcache扩展程序。</p>
+
+<ol>
+<li><p>1.下载dll扩展程序（<a href="http://downloads.php.net/pierre/" target="_blank">到这里去下载</a>）,放于c:/xampp/php/ext/目录下。</p></li>
+<li><p>2.开启扩展服务。
+进入php.ini文件添加如下<code>extension=php_memcache.dll</code></p></li>
+<li><p>3.重新启动XAMPP/WAMP</p></li>
+</ol>
+
+<h2>使用memcache缓存</h2>
+
+<p>超简单示例：</p>
+
+<pre><code>&lt;?php
+$memcache = new Memcache;
+
+$memcache-&gt;connect('127.0.0.1',11211);
+$memcache-&gt;add('name','柳公子');
+$name = $memcache-&gt;get('name');
+
+echo $name;
+</code></pre>
+
+<p>进入官网手册，了解更多关于<a href="http://cn2.php.net/manual/zh/book.memcache.php">memcache</a>相关信息</p>
+
+<h2>工具</h2>
+
+<p><a href="http://www.junopen.com/memadmin/" target="_blank">memcache监控程序</a></p>
+
+<p>参考资料：</p>
+
+<p><a href="http://works.jinbuguo.com/man/memcached.html">memcache手册中文</a></p>
+
+<p><a href="http://www.codeforest.net/how-to-install-memcached-on-windows-machine">How to install Memcached on Windows machine</a></p>
+
+<p><a href="http://blog.csdn.net/poechant/article/details/7074257">Memcached基础及示例程序</a></p>
+
+<p><a href="http://blog.csdn.net/poechant/article/details/7082115">Memcached配置参数初解</a></p>
+
+<p><a href="http://zh.wikipedia.org/wiki/Memcached">维基百科：memcached</a></p>
+
+<p><a href="http://baike.baidu.com/view/794242.htm">百度百科：memcached</a></p>
+
+<p><a href="http://cn2.php.net/manual/zh/book.memcache.php">手册：memcached</a></p>
+</div>
+                            <span class="post-date">2014-05-27 17:55:00</span>
+                            <span class="post-tag">php, 缓存技术, memcache</span>
+                        </div>
+                                            <div class="post">
                             <h2><a href="http://huliuqing.github.io/2014-05-26-translate-PHP-website-optimization.html">如何优化PHP网站[译]</a></h2>
                             <div class="post-content"><p>转载请注明出处</p>
 
@@ -845,103 +954,6 @@ o(lglgn)的BST。
 </div>
                             <span class="post-date">2014-05-07 09:20:00</span>
                             <span class="post-tag">学习方法, 算法, 编程, learning, algorithms</span>
-                        </div>
-                                            <div class="post">
-                            <h2><a href="http://huliuqing.github.io/most-visit-websites.html">个人关注的博客与网站</a></h2>
-                            <div class="post-content"><p>作为一名IT界菜鸟，我也有我心目中的“女神”。希望哪一天也能够向他们一样“受人敬仰”。如果你也喜欢我的“女神”们，请关注他们并点32个赞。</p>
-
-<h2>PHP相关</h2>
-
-<ul>
-<li><p><a href="http://www.laruence.com/" target="_blank">风雪之隅</a></p></li>
-<li><p><a href="http://www.php-internals.com/" target="_blank">@深入理解PHP内核</a>
-<blockquote>TIPI是一个开源项目，这个项目是为了分享有关PHP内部实现的方方面面，以便更好地运用PHP。项目包含《深入理解PHP内核》这本开源书籍，同时还有其他相关的一些项目，比如一些PHP扩展</blockquote></p></li>
-<li><p><a href="http://blog.csdn.net/heiyeshuwu" target="_blank">黑夜路人</a>
-<blockquote>开源技术爱好者，CSDN博客技术专家。微信公众号：heiyeluren2012</blockquote></p></li>
-<li><p><a href="http://www.phppan.com/" target="_blank">PHPpan</a>
-<blockquote>深入理解PHP内核项目组成员之一</blockquote></p></li>
-<li><p><a href="http://www.walu.cc/" target="_blank">walu</a></p></li>
-<li><p><a href="http://www.wawacai.net/" target="_blank">第四部</a>
-<blockquote>擅长：PHP/JavaScript/HTML(5)/CSS(3)</blockquote></p></li>
-<li><p><a href="http://wulijun.github.io/php-the-right-way/" target="_blank">PHP之道</a>
-<blockquote>Github上开源项目：网站的目标就是搜集PHP最佳实践、编码规范和网络上的权威学习指南，给PHP学习者提供一个易于阅读，快速查找的入口。</blockquote></p></li>
-<li><p><a href="http://www.cnblogs.com/leoo2sk/" target="_blank">T2噬菌体</a> | <a href="http://blog.codinglabs.org/" target="_blank">CodingLabs</a>
-<blockquote>码农一枚，山东人，目前混在北京。平时以写写代码、学学数学为乐。不写代码时喜欢踢足球、骑车、打游戏、看动漫和电影</blockquote></p></li>
-<li><p><a href="http://www.cyrec.org/" target="_blank">Cyrec’s Blog </a></p></li>
-<li><p><a href="http://www.mengjingde.com/" target="_blank">虎归山 = M.king</a>
-<blockquote>M.king  另一个网名叫 虎归山 ，熟悉的网友更喜欢叫 虎子，一个北漂三年有余，一个互联网最普普通通的小伙</blockquote></p></li>
-<li><p><a href="http://demon.at/" target="_blank">@DEMON</a>
-<blockquote>主业打杂,副业php,linux c,标准矮穷挫。</blockquote></p></li>
-</ul>
-
-<h2>Web相关</h2>
-
-<ul>
-<li><p><a href="http://paranimage.com/" target="_blank">帕兰映像</a>
-<blockquote>帕兰映像成立于2007年7月，主要关注科技网络、软件应用、设计开发和教程技巧等内容。</blockquote></p></li>
-<li><p><a href="http://www.qianduan.net/" target="_blank">前端观察</a>
-<blockquote>这里是一个纯粹的前端技术分享网站，本站的目的是为前端技术人员提供所需的资讯及资源。</blockquote></p></li>
-<li><p><a href="http://www.w3cfuns.com" target="_blank">W3Cfuns</a></p></li>
-<li><p><a href="http://www.csszengarden.com/" target="_blank">CSS 禅意花园</a></p></li>
-<li><p><a href="http://www.smashingmagazine.com/" target="_blank">Smashing Magazine</a></p></li>
-<li><p><a href="http://www.smashingmagazine.com/" target="_blank">AlloyTeam</a></p></li>
-<li><p><a href="http://www.w3cplus.com/" target="_blank">W3Cplus</a>
-<blockquote>记述前端那些事-引领web前沿-打造精品css3教程</blockquote></p></li>
-<li><p><a href="http://www.w3cplus.com/" target="_blank">张鑫旭-鑫空间-鑫生活</a></p></li>
-<li><p><a href="http://www.junchenwu.com/WAI/wai-pageauth.html" target="_blank">Web内容可访问性指南 1.0</a></p></li>
-<li><p><a href="http://www.uisdc.com/" target="_blank">优设网</a>
-<blockquote>记述前端那些事-引领web前沿-打造精品css3教程</blockquote></p></li>
-<li><p><a href="http://www.colorhexa.com/" target="_blank">ColorHexa</a>
-<blockquote>ColorHexa 是一个免费的颜色工具，提供与任何颜色相关的信息。只需在搜索框输入任意颜色值（查看完整列表），ColorHexa 就能给你返回一个详细的描述，并会自动将其转换成对应的十六进制、二进制、RGB、CMYK、HSL、HSV、 CIE-Lab、Hunter-Lab、CIE-Luv、CIE-LCH、XYZ、xyY 值。 </blockquote></p></li>
-<li><p><a href="http://mrthink.net/" target="_blank">Mr.Think</a>
-<blockquote>这里是我记录及分享知识与生活琐事的地方，文章均为原创，内容目前限于CSS技术、XHTML技术、JavaScript技术、SEO技术、UE知识</blockquote></p></li>
-</ul>
-
-<h2>数据库</h2>
-
-<ul>
-<li><p><a href="http://www.oicto.com/" target="_blank">赵荣涛</a>
-<blockquote>这里是我记录及分享知识与生活琐事的地方，文章均为原创，内容目前限于CSS技术、XHTML技术、JavaScript技术、SEO技术、UE知识</blockquote></p></li>
-<li><p><a href="http://dbanotes.net/" target="_blank">闲思录</a></p></li>
-<li><p><a href="http://www.hellodb.net/" target="_blank">Hello Database</a>
-<blockquote>张瑞，Oracle ACE，网名HelloDBA，2005年加入阿里巴巴DBA团队，擅长数据库性能优化与应用架构改进，历经阿里巴巴数据库技术的变革，现任职于阿里集团技术保障部DBA团队，负责淘宝和天猫的数据库支持工作</blockquote></p></li>
-<li><p><a href="http://www.ningoo.net/" target="_blank">江边潮未尽，枫红一季秋</a></p></li>
-</ul>
-
-<h2>其它</h2>
-
-<ul>
-<li><p><a href="http://news.dbanotes.net/" target="_blank">Startup News</a></p></li>
-<li><p><a href="http://huoding.com/" target="_blank">火丁笔记</a></p></li>
-<li><p><a href="http://opencv.org/" target="_blank">OpenCV</a></p></li>
-<li><p><a href="http://www.semyj.com/" target="_blank">SEM一家之言</a></p></li>
-<li><p><a href="http://www.geek-cy.com/" target="_blank">geek-cy</a></p></li>
-<li><p><a href="http://openresty.org/download/agentzh-nginx-tutorials-zhcn.html" target="_blank">agentzh 的 Nginx 教程</a></p></li>
-</ul>
-
-<p>以下列表本人很少涉及：</p>
-
-<h2>数据结构与算法</h2>
-
-<ul>
-<li><p><a href="http://slowsnail.com.cn/" target="_blank">slow snail</a></p></li>
-<li><p><a href="http://www.matrix67.com/blog/" target="_blank">Matrix67: The Aha Moments</a></p></li>
-<li><p><a href="http://www.sorting-algorithms.com/" target="_blank">Sorting Algorithm Animations</a></p></li>
-<li><p><a href="http://www.52nlp.cn/" target="_blank">我爱自然语言处理</a></p></li>
-<li><p><a href="http://www.csie.ntnu.edu.tw/~u91029/" target="_blank">演算法筆記</a></p></li>
-<li><p><a href="http://blog.52nlp.org/" target="_blank">52nlp's Learning Notes</a></p></li>
-</ul>
-
-<h2>安全</h2>
-
-<ul>
-<li><p><a href="http://evilcos.me/" target="_blank">EVILCOS @余弦</a></p></li>
-<li><p><a href="http://web2hack.sinaapp.com/" target="_blank">《Web前端黑客技术揭秘》</a></p></li>
-<li><p><a href="http://www.80sec.com/" target="_blank">80sec</a></p></li>
-</ul>
-</div>
-                            <span class="post-date">2014-05-06 09:00:00</span>
-                            <span class="post-tag">web sites, blogs</span>
                         </div>
                     
                     <div class="pagination">
