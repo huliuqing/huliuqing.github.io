@@ -6,6 +6,91 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
+<title><![CDATA[Web缓存加速指南]]></title>
+<description><![CDATA[&lt;blockquote&gt;
+    如未特别标明，文章均属原创。转载请注明出处 
+    
+by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;前端缓存优化加速的指南&lt;/h2&gt;
+
+&lt;p&gt;在这篇文章中，我会不定时的增加有关前端优化加速相关的好文章。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/lhb25/archive/2009/06/28/1512485.html&quot;&gt;Web缓存技术相关简析&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.chedong.com/tech/cache_docs.html&quot;&gt;面向站长和网站管理员的Web缓存加速指南[翻译]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html&quot;&gt;Caching in HTTP[英文]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://browserdiet.com/en/&quot;&gt;how to lose weight in the browser&lt;/a&gt;&lt;/p&gt;
+]]></description>
+<pubDate>2014-05-29T09:00:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-05-29-web-caching-guide.html</guid>
+<link>http://huliuqing.github.io/2014-05-29-web-caching-guide.html</link>
+</item>
+<item>
+<title><![CDATA[如何创建简单的批处理（.bat）文件[译文]]]></title>
+<description><![CDATA[&lt;blockquote&gt;
+    如未特别标明，文章均属原创。转载请注明出处 
+    
+by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;想简单的学习批处理文件书写方法，于是翻译了这篇文章。原文&lt;a href=&quot;http://www.makeuseof.com/tag/write-simple-batch-bat-file/&quot;&gt;在这&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;1.创建一个.bat文件&lt;/h2&gt;
+
+&lt;p&gt;在桌面创建一个文本文件，打开刚刚创建的文件。点解 file &gt; save as，并输入批处理文件的文件名以.bat结尾。我创建的是testbat.bat&lt;/p&gt;
+
+&lt;h2&gt;2.快速掌握基本关键字&lt;/h2&gt;
+
+&lt;p&gt;如果你会使用命令行模式，那你更容易使用批处理文件,因为批处理文件和命令行模式使用同一种语言。我们仅仅需要通过批处理文件告诉命令行提示符需要做什么，而不是每次都打开命令行输入那些命令。这会为我们节省大量时间。只不过我们需要在批处理文件中添加一些逻辑处理（如简单的循环，条件语句等）&lt;/p&gt;
+
+&lt;p&gt;有如下7个简单的命令我们需要去熟悉，在命令行模式下这些命令是不区分大小写的&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;TITLE - 设置命令提示窗口的窗口标题。默认为“cmd”
+
+ECHO  - 批文件的输出语句。echo之后的所有词语都会在命令行中显示出来
+
+ECHO OFF - 通常放在文件第一行。告诉命令行不要显示bat文件中的命令
+
+PAUSE - 使用此关键字将会在命令行中输出“press any key to continue”,这样我们就可以有更多的时间去查看命令信息。这条语句在调试的时候会非常有用，因为它会终止批文件继续执行除非我们按下任意键。
+
+CLS   - 清屏处理
+
+IPCONFIG 打印输出当前的TCP/IP配置的设置值
+
+ping     ping + ip地址，让我们知道电脑是否正常通讯
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;3.快速掌握逻辑语句&lt;/h2&gt;
+
+&lt;p&gt;问题
+  ① 通过ipconfig/all检测电脑网络设置
+  ② 预留时间给用户阅读信息
+  ③ ping google.com以检测我们的电脑是否联网了
+  ④ 预留时间给用户阅读信息&lt;/p&gt;
+
+&lt;h2&gt;4.编写.bat文件&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;echo off    
+chcp 65001
+echo 通过bat文件，执行查看网络连接是否正常
+ipconfig /all
+pause
+ping www.google.com
+echo 所有执行通过
+pause
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;5.点击.bat文件运行&lt;/h2&gt;
+]]></description>
+<pubDate>2014-05-29T09:00:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-05-29-how-to-write-a-bat-file.html</guid>
+<link>http://huliuqing.github.io/2014-05-29-how-to-write-a-bat-file.html</link>
+</item>
+<item>
 <title><![CDATA[memcache缓存处理简介]]></title>
 <description><![CDATA[&lt;blockquote&gt;
   &lt;p&gt;如未特别标明，文章均属原创。转载请注明出处。by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;&lt;/p&gt;
