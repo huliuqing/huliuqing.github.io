@@ -4,10 +4,41 @@
   <title><![CDATA[]]></title>
   <link href="/atom.xml" rel="self"/>
   <link href="/"/>
-  <updated>2014-05-29T11:05:33+08:00</updated>
+  <updated>2014-06-06T14:03:16+08:00</updated>
   <id>/</id>
   <generator uri="http://gitcafe.com/lizheming/pmblog">PMBlog</generator>
 
+    <entry>
+    <title type="html"><![CDATA[关于APC(alternative PHP cache)的那些事[译]]]></title>
+    <link href="http://huliuqing.github.io/2014-05-30-everything-you-need-to-know-about-APC.html"/>
+    <id>http://huliuqing.github.io/2014-05-30-everything-you-need-to-know-about-APC.html</id>
+    <updated>2014-05-30T11:30:00+08:00</updated>
+    <content type="html"><![CDATA[<blockquote>
+    如未特别标明，文章均属原创。转载请注明出处 
+    
+by : 柳公子 <a href="http://huliuqing.github.io">http://huliuqing.github.io</a>
+</blockquote>
+
+<p>这是一篇翻译的文章。最近在使用APC(alternative PHP cache)扩展提升网站性能，虽然已运用到网站上，但是希望了解更多关于APC工作原理相关的知识。遂翻译了这篇文章<a href="http://linuxaria.com/howto/everything-you-need-to-know-about-apc-alternate-php-cache">Everything you need to know about APC (Alternate PHP cache)</a>。水平有限，有语句问题，邮我<code>liuqing.phper.cn@gmail.com</code>
+你问我为什么要自己翻译？呵呵</p>
+
+<h2>关于APC(alternative PHP cache)的那些事</h2>
+
+<p>如果你是系统管理员，并且希望在Drupal，WordPress或自己开发的项目中提升PHP网站的性能，或许你就应该听说过Alternative PHP cache(简称 APC).</p>
+
+<blockquote>
+  <p>Alternative PHP cache是一款免费开源的opcode缓存系统，旨在提供免费开源强健的缓存和优化框架给PHP中间代码。</p>
+</blockquote>
+
+<p>通常我们通过php.net官网去了解APC的用法，但是我觉得仅仅通过它并不能更好的了解到如何使用APC提升性能。可以看看Guillermo Garron的<a href="http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">这篇文章</a>去了解一些使用apc之后的一些性能对比结果。</p>
+
+<h2>APC如何工作</h2>
+
+<p>首先我们需要知道，在Zend Engine中php是如何执行的。在Zend Engine中PHP脚本通常按照以下步骤运行。我们称之为“opcodes”。
+    1.从文件系统中读取PHP代码，并放入内存
+    2.语法分析：对内存中的php代码转换成句柄（tokens）和词典</p>
+]]></content>
+  </entry>
     <entry>
     <title type="html"><![CDATA[Web缓存加速指南]]></title>
     <link href="http://huliuqing.github.io/2014-05-29-web-caching-guide.html"/>

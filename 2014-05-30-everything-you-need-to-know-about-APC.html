@@ -67,49 +67,38 @@
 					</div>
 				</div><!--end/left sider-->                <div class="posts">
                     <div class="post">
-                        <h2><a href="http://huliuqing.github.io/introduce-pmblog-lins-menus.html">PMBlog links 和menus使用介绍</a></h2>
-                        <div class="post-content"><p>最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。</p>
+                        <h2><a href="http://huliuqing.github.io/2014-05-30-everything-you-need-to-know-about-APC.html">关于APC(alternative PHP cache)的那些事[译]</a></h2>
+                        <div class="post-content"><blockquote>
+    如未特别标明，文章均属原创。转载请注明出处 
+    
+by : 柳公子 <a href="http://huliuqing.github.io">http://huliuqing.github.io</a>
+</blockquote>
 
-<p>在这里我想对51CTO的全体工作人员说一句'cao 草'，能不能联系你们并回复下我。</p>
+<p>这是一篇翻译的文章。最近在使用APC(alternative PHP cache)扩展提升网站性能，虽然已运用到网站上，但是希望了解更多关于APC工作原理相关的知识。遂翻译了这篇文章<a href="http://linuxaria.com/howto/everything-you-need-to-know-about-apc-alternate-php-cache">Everything you need to know about APC (Alternate PHP cache)</a>。水平有限，有语句问题，邮我<code>liuqing.phper.cn@gmail.com</code>
+你问我为什么要自己翻译？呵呵</p>
 
-<p>没办法想到了在github可以开通自己的blog，尝试了一下。不过在使用jekyll的时候环境一直无法搭建，感谢公司</p>
+<h2>关于APC(alternative PHP cache)的那些事</h2>
 
-<p>万幸在强大的github上，找到了PMBlog，谢谢<a href="https://github.com/lizheming">公子</a>（类似jekyll）。现在介绍关于PMBlog程序中links和menus插件的相关使用方法</p>
+<p>如果你是系统管理员，并且希望在Drupal，WordPress或自己开发的项目中提升PHP网站的性能，或许你就应该听说过Alternative PHP cache(简称 APC).</p>
 
-<h2>PMBlog的links链接和menus导航基本介绍</h2>
+<blockquote>
+  <p>Alternative PHP cache是一款免费开源的opcode缓存系统，旨在提供免费开源强健的缓存和优化框架给PHP中间代码。</p>
+</blockquote>
 
-<p>通过如下地址下载需要的插件<a href="https://github.com/lizheming/PMBlog/wiki/%E6%8F%92%E4%BB%B6">PMBlog 插件</a></p>
+<p>通常我们通过php.net官网去了解APC的用法，但是我觉得仅仅通过它并不能更好的了解到如何使用APC提升性能。可以看看Guillermo Garron的<a href="http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html">这篇文章</a>去了解一些使用apc之后的一些性能对比结果。</p>
 
-<p>这里我下载的是 Page2Link 和 Page2Menu插件，并放置到usr/plugin目录下</p>
+<h2>APC如何工作</h2>
 
-<p>Page2Link插件</p>
-
-<blockquote>友情链接插件，按照links.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成links.html。主题模板中可以使用{{link}}变量调用它。{{link}}变量是一个数组变量，需要使用循环才能输出</blockquote>
-
-<p>Page2Menu插件</p>
-
-<blockquote>导航链接插件，按照menus.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成menus.html。主题模板中可以使用{{menus}}变量调用它。{{menus}}变量是一个数组变量，需要使用循环才能输出</blockquote>
-
-<h2>插件使用</h2>
-
-<p>关于这两个的插件使用也是非常的简单的，我们只需要</p>
-
-<pre><code># 配置config.php文件
-$config['actived_plugins'] ="Page2Links,Page2Menus" //我们也可以简单的使用*开启全部的插件
-# 使用
-在模板文件中，我们仅仅需要添加如下代码便可以完成，link/menu的功能
-{% for item in menu/link %}
-    {{item.title}}  {# MenuItem's title #}
-    {{item.url}}    {# MenuItem's url #}
-    {{item.description}}    {# MenuItem's description #}
- {% endfor %}
-</code></pre>
+<p>首先我们需要知道，在Zend Engine中php是如何执行的。在Zend Engine中PHP脚本通常按照以下步骤运行。我们称之为“opcodes”。
+    1.从文件系统中读取PHP代码，并放入内存
+    2.语法分析：对内存中的php代码转换成句柄（tokens）和词典</p>
 </div>
-                        <span class="post-date">2014-04-24 14:13:34</span>
+                        <span class="post-date">2014-05-30 11:30:00</span>
                         <span class="post-tag">
-                                                        <a href="http://huliuqing.github.io/tag/介绍">介绍</a> 
-                                                        <a href="http://huliuqing.github.io/tag/PHP项目">PHP项目</a> 
-                                                        <a href="http://huliuqing.github.io/tag/PMBlog">PMBlog</a> 
+                                                        <a href="http://huliuqing.github.io/tag/PHP">PHP</a> 
+                                                        <a href="http://huliuqing.github.io/tag/缓存">缓存</a> 
+                                                        <a href="http://huliuqing.github.io/tag/opcodes">opcodes</a> 
+                                                        <a href="http://huliuqing.github.io/tag/APC">APC</a> 
                                                     </span>
                         
                         <!-- open 3td party comment service-->
