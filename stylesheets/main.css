@@ -310,6 +310,11 @@ pre ol li{
 	margin-top: 20px;
 }
 
+ .pagination li{
+ 	display: inline;
+	margin-right: 6px;
+ }
+ 
  .pagination li a{
  	color:#fff;
 	background-color: rgb(232,86,71);
@@ -372,4 +377,8 @@ pre ol li{
 .span3 {
 	width: 30%;
 	float: left;
+}
+
+pre.linenums{
+	overflow: auto;
 }

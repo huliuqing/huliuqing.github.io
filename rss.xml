@@ -6,59 +6,68 @@
 <language>zh-cn</language>
 <ttl>10</ttl>
 <item>
-<title><![CDATA[关于APC(alternative PHP cache)的那些事[译]]]></title>
-<description><![CDATA[&lt;blockquote&gt;
-    如未特别标明，文章均属原创。转载请注明出处 
-    
-by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
-&lt;/blockquote&gt;
+<title><![CDATA[git入门资源]]></title>
+<description><![CDATA[&lt;h2&gt;git入门资源&lt;/h2&gt;
 
-&lt;p&gt;这是一篇翻译的文章。最近在使用APC(alternative PHP cache)扩展提升网站性能，虽然已运用到网站上，但是希望了解更多关于APC工作原理相关的知识。遂翻译了这篇文章&lt;a href=&quot;http://linuxaria.com/howto/everything-you-need-to-know-about-apc-alternate-php-cache&quot;&gt;Everything you need to know about APC (Alternate PHP cache)&lt;/a&gt;。水平有限，有语句问题，邮我&lt;code&gt;liuqing.phper.cn@gmail.com&lt;/code&gt;
-你问我为什么要自己翻译？呵呵&lt;/p&gt;
+&lt;p&gt;&lt;blockquote&gt;
+    如未特别标明，文章均属原创。转载请注明出处 &lt;/p&gt;
 
-&lt;h2&gt;关于APC(alternative PHP cache)的那些事&lt;/h2&gt;
+&lt;p&gt;by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
+&lt;/blockquote&gt;&lt;/p&gt;
 
-&lt;p&gt;如果你是系统管理员，并且希望在Drupal，WordPress或自己开发的项目中提升PHP网站的性能，或许你就应该听说过Alternative PHP cache(简称 APC).&lt;/p&gt;
+&lt;p&gt;因为写github pages的原因，而学习git相关使用方法。网上有非常多的入门教程可供学习，在这里列出个人觉得比较适合初学者的两个不错的资源。&lt;/p&gt;
+
+&lt;h2&gt;一）Git教程&lt;/h2&gt;
+
+&lt;p&gt;廖雪峰老师编写的《Git教程》。完全面向初学者的，内容讲解的浅显易懂。戳这里&lt;a href=&#039;http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000&#039; target=&quot;_blank&quot;&gt;查看&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;另外,他(numbbbbb)将廖雪峰老师的教程制作了&lt;a href=&#039;https://github.com/numbbbbb/Git-Tutorial-By-liaoxuefeng&#039; target=&quot;_blank&quot;&gt;电子书&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;二）tryGit教程（E文）&lt;/h2&gt;
+
+&lt;p&gt;tryGit教程是由Code School出品，在线Git命令使用教程。配合廖雪峰老师&lt;code&gt;Git教程&lt;/code&gt;，让我们真正掌握如何使用Git。当然，如果你自行配置好了Git环境，那Don&#039;t be shy,just try!&lt;/p&gt;
+
+&lt;h2&gt;----------------------------------------&lt;/h2&gt;
+
+&lt;p&gt;其它：&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#039;http://rogerdudler.github.io/git-guide/index.zh.html&#039; target=&quot;_blank&quot;&gt;git - 简明指南&lt;/a&gt; &lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Alternative PHP cache是一款免费开源的opcode缓存系统，旨在提供免费开源强健的缓存和优化框架给PHP中间代码。&lt;/p&gt;
+  &lt;p&gt;号称史上最简单入门，个人没试过&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;通常我们通过php.net官网去了解APC的用法，但是我觉得仅仅通过它并不能更好的了解到如何使用APC提升性能。可以看看Guillermo Garron的&lt;a href=&quot;http://www.garron.me/en/linux/apache-vs-nginx-php-fpm-varnish-apc-wordpress-performance.html&quot;&gt;这篇文章&lt;/a&gt;去了解一些使用apc之后的一些性能对比结果。&lt;/p&gt;
-
-&lt;h2&gt;APC如何工作&lt;/h2&gt;
-
-&lt;p&gt;首先我们需要知道，在Zend Engine中php是如何执行的。在Zend Engine中PHP脚本通常按照以下步骤运行。我们称之为“opcodes”。
-    1.从文件系统中读取PHP代码，并放入内存
-    2.语法分析：对内存中的php代码转换成句柄（tokens）和词典&lt;/p&gt;
 ]]></description>
-<pubDate>2014-05-30T11:30:00+08:00</pubDate>
-<guid>http://huliuqing.github.io/2014-05-30-everything-you-need-to-know-about-APC.html</guid>
-<link>http://huliuqing.github.io/2014-05-30-everything-you-need-to-know-about-APC.html</link>
+<pubDate>2014-06-16T14:00:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-06-16-git-tutorials-resource.html</guid>
+<link>http://huliuqing.github.io/2014-06-16-git-tutorials-resource.html</link>
 </item>
 <item>
-<title><![CDATA[Web缓存加速指南]]></title>
+<title><![CDATA[前端开发体系构建]]></title>
 <description><![CDATA[&lt;blockquote&gt;
     如未特别标明，文章均属原创。转载请注明出处 
     
 by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
 &lt;/blockquote&gt;
 
-&lt;h2&gt;前端缓存优化加速的指南&lt;/h2&gt;
+&lt;p&gt;本文列出前端开发中收集的好文章，将持续更新&lt;/p&gt;
 
-&lt;p&gt;在这篇文章中，我会不定时的增加有关前端优化加速相关的好文章。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/cnwebdeveloper/articles/2234423.html&quot; target=&#039;_blank&#039;&gt;浏览器内部工作原理&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/lhb25/archive/2009/06/28/1512485.html&quot;&gt;Web缓存技术相关简析&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/talk-front-end-integrated-solution-part2&quot; target=&#039;_blank&#039;&gt;前端开发体系建设日记&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.chedong.com/tech/cache_docs.html&quot;&gt;面向站长和网站管理员的Web缓存加速指南[翻译]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/fouber/blog/issues/3&quot; target=&#039;_blank&#039;&gt;前端工程与性能优化&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html&quot;&gt;Caching in HTTP[英文]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.xufei.gitpress.org/&quot; target=&#039;_blank&#039;&gt;前端架构那些事儿&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://browserdiet.com/en/&quot;&gt;how to lose weight in the browser&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/fanker/javascript-style-reference&quot; target=&#039;_blank&#039;&gt;Javascript代码及注释规范&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/WenTao-Love/fks&quot;&gt;Frontend Knowledge Structure&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;to be continued&lt;/p&gt;
 ]]></description>
-<pubDate>2014-05-29T09:00:00+08:00</pubDate>
-<guid>http://huliuqing.github.io/2014-05-29-web-caching-guide.html</guid>
-<link>http://huliuqing.github.io/2014-05-29-web-caching-guide.html</link>
+<pubDate>2014-06-10T16:00:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-06-10-web-frontend-framework-develop-resource.html</guid>
+<link>http://huliuqing.github.io/2014-06-10-web-frontend-framework-develop-resource.html</link>
 </item>
 <item>
 <title><![CDATA[如何创建简单的批处理（.bat）文件[译文]]]></title>
@@ -120,6 +129,30 @@ pause
 <pubDate>2014-05-29T09:00:00+08:00</pubDate>
 <guid>http://huliuqing.github.io/2014-05-29-how-to-write-a-bat-file.html</guid>
 <link>http://huliuqing.github.io/2014-05-29-how-to-write-a-bat-file.html</link>
+</item>
+<item>
+<title><![CDATA[Web缓存加速指南]]></title>
+<description><![CDATA[&lt;blockquote&gt;
+    如未特别标明，文章均属原创。转载请注明出处 
+    
+by : 柳公子 &lt;a href=&quot;http://huliuqing.github.io&quot;&gt;http://huliuqing.github.io&lt;/a&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;前端缓存优化加速的指南&lt;/h2&gt;
+
+&lt;p&gt;在这篇文章中，我会不定时的增加有关前端优化加速相关的好文章。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.cnblogs.com/lhb25/archive/2009/06/28/1512485.html&quot;&gt;Web缓存技术相关简析&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.chedong.com/tech/cache_docs.html&quot;&gt;面向站长和网站管理员的Web缓存加速指南[翻译]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html&quot;&gt;Caching in HTTP[英文]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://browserdiet.com/en/&quot;&gt;how to lose weight in the browser&lt;/a&gt;&lt;/p&gt;
+]]></description>
+<pubDate>2014-05-29T09:00:00+08:00</pubDate>
+<guid>http://huliuqing.github.io/2014-05-29-web-caching-guide.html</guid>
+<link>http://huliuqing.github.io/2014-05-29-web-caching-guide.html</link>
 </item>
 <item>
 <title><![CDATA[memcache缓存处理简介]]></title>
