@@ -3,5 +3,5 @@
 
 积累、分享PHP开发相关技术
 
-huliuqing.github.io
+http://huliuqing.github.io
 ===================
