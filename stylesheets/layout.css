@@ -136,6 +136,7 @@ body{
 	min-height: 220px;
 	padding-bottom:3em;
 	width:100%;
+	clear: both;
 }
 
 .footer:after{
