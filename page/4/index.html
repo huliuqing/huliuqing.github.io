@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>柳公子</title>
+        <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/reset.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/layout.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/main.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="http://huliuqing.github.io/stylesheets/font.css" media="screen" />
+        
+        <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://imnerd.org/lab/pmblog/src/desert.css" />
+        <script type="text/javascript" src="http://imnerd.org/lab/pmblog/src/prettify.js"></script>
+        <link rel="stylesheet" href="http://fancyapps.com/fancybox/source/jquery.fancybox.css?v=2.1.4" type="text/css" media="screen" />
+        <script type="text/javascript" src="http://fancyapps.com/fancybox/source/jquery.fancybox.pack.js?v=2.1.4"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="brand">
+                    <a href="http://huliuqing.github.com" class="avatar">
+                        <img src="http://huliuqing.github.io/images/header.jpg" alt="柳公子">
+                    </a>    
+                    <h1><a href="http://huliuqing.github.io">柳公子</a></h1>
+                </div>
+
+        
+                <div class="menu">  
+                    <h2>导航 / menu</h2>              
+                    <ul>        
+                                                    <li><a href="http://huliuqing.github.io/index.html "  title="首页">首页</a></li>
+                                                    <li><a href="http://huliuqing.github.io/contactme.html "  title="联系柳公子">联系我</a></li>
+                                                    <li><a href="http://huliuqing.github.io/aboutme.html "  title="关于柳公子">关于我</a></li>
+                            
+                    </ul>
+                </div>
+                <div class="search">
+                    <form>
+                        <input type="text" name="search" id="search" value="" placeholder="搜索"></input>
+                        <button id="sbutton">搜索</button>
+                    </form>
+                </div>  
+            </div><!--end / header -->
+
+            <div class="contents">    				<div class="sider">
+
+												
+					<div class="links">		
+						<h2>友链 / friend links</h2>
+						<ul>
+					        					        	<li><a href="http://stackoverflow.com/users/1969039/liuqing-hu"  title="柳公子在stackoverflow">stackoverflow</a></li>
+					        					        	<li><a href="https://github.com/huliuqing"  title="柳公子在github">github</a></li>
+					        					        	<li><a href="http://huliuqing.diandian.com "  title="柳公子在点点博客">柳公子 - 点点网</a></li>
+					        					        	<li><a href="http://weibo.com/focusliuqing"  title="柳公子在新浪微博">柳公子 - weibo</a></li>
+					              
+						</ul>
+					</div>			
+					
+					<div class="links">
+						<h2>找到我/find me</h2>		
+						<ul>
+					        <li><a href="http://huliuqing.diandian.com">柳公子点点博客</a></li>    
+					        <li><a href=" http://stackoverflow.com/users/1969039/liuqing-hu">柳公子StackOverflow</a></li>
+					        <li><a href="https://github.com/huliuqing">柳公子github</a></li>
+						</ul>
+					</div>
+				</div><!--end/left sider-->                <div class="posts">
+                                            <div class="post">
+                            <h2><a href="http://huliuqing.github.io/introduce-pmblog-lins-menus.html">PMBlog links 和menus使用介绍</a></h2>
+                            <div class="post-content"><p>最近我一直有在积累的博客，被关闭了。现在才体会到为什么不能够寄住在别人的博客平台，记录和分享工作中的点滴。</p>
+
+<p>在这里我想对51CTO的全体工作人员说一句'cao 草'，能不能联系你们并回复下我。</p>
+
+<p>没办法想到了在github可以开通自己的blog，尝试了一下。不过在使用jekyll的时候环境一直无法搭建，感谢公司</p>
+
+<p>万幸在强大的github上，找到了PMBlog，谢谢<a href="https://github.com/lizheming">公子</a>（类似jekyll）。现在介绍关于PMBlog程序中links和menus插件的相关使用方法</p>
+
+<h2>PMBlog的links链接和menus导航基本介绍</h2>
+
+<p>通过如下地址下载需要的插件<a href="https://github.com/lizheming/PMBlog/wiki/%E6%8F%92%E4%BB%B6">PMBlog 插件</a></p>
+
+<p>这里我下载的是 Page2Link 和 Page2Menu插件，并放置到usr/plugin目录下</p>
+
+<p>Page2Link插件</p>
+
+<blockquote>友情链接插件，按照links.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成links.html。主题模板中可以使用{{link}}变量调用它。{{link}}变量是一个数组变量，需要使用循环才能输出</blockquote>
+
+<p>Page2Menu插件</p>
+
+<blockquote>导航链接插件，按照menus.example.html的格式（其实就是Markdown的链接格式）将链接一行一个写好，保存成menus.html。主题模板中可以使用{{menus}}变量调用它。{{menus}}变量是一个数组变量，需要使用循环才能输出</blockquote>
+
+<h2>插件使用</h2>
+
+<p>关于这两个的插件使用也是非常的简单的，我们只需要</p>
+
+<pre><code># 配置config.php文件
+$config['actived_plugins'] ="Page2Links,Page2Menus" //我们也可以简单的使用*开启全部的插件
+# 使用
+在模板文件中，我们仅仅需要添加如下代码便可以完成，link/menu的功能
+{% for item in menu/link %}
+    {{item.title}}  {# MenuItem's title #}
+    {{item.url}}    {# MenuItem's url #}
+    {{item.description}}    {# MenuItem's description #}
+ {% endfor %}
+</code></pre>
+</div>
+                            <span class="post-date">2014-04-24 14:13:34</span>
+                            <span class="post-tag">介绍, PHP项目, PMBlog</span>
+                        </div>
+                                            <div class="post">
+                            <h2><a href="http://huliuqing.github.io/aboutme.html">关于我 / About Me</a></h2>
+                            <div class="post-content"><p>柳公子</p>
+
+<h2>出生&求学</h2>
+
+<p>我出生在江西九江的一个农村。
+12岁以前过着无忧无虑的生活：春天放牛、夏天钓虾，冬天烤炭火。
+12-23岁开始一个人的求学路，借读初中、高中，再然后于江西南昌读大学</p>
+
+<h2>教育</h2>
+
+<p>2007年9月入学江西南昌大学软件学院，软件技术专业。开始程序开发之路</p>
+
+<h2>经历</h2>
+
+<p>关于我的经历，2008年之后才慢慢开始精彩起来</p>
+
+<ul>
+<li>2008年入伍</li>
+<li>2010年退役</li>
+<li>2011年续学</li>
+<li>2011年底进入江西腾王科技开发游戏。结果进入web开发领域，从事PHP开发相关工作至今</li>
+</ul>
+
+<h2>联系我</h2>
+
+<p>可以通过以下方式联系到我：</p>
+
+<ul>
+<li>gmail:huliuqing1989@gmail.com</li>
+<li>weibo:http://weibo.com/focusliuqing</li>
+</ul>
+
+<h2>关注我</h2>
+
+<p>作为伪技术型宅男，偶尔会出现在这些地方。</p>
+
+<ul>
+<li>stackoverflow : http://stackoverflow.com/users/1969039/liuqing-hu</li>
+<li>github : https://github.com/huliuqing</li>
+</ul>
+
+<h2>目标</h2>
+
+<p>为成为正真的技术型宅男而努力奋斗</p>
+</div>
+                            <span class="post-date">2014-04-22 16:25:02</span>
+                            <span class="post-tag">介绍, 个人介绍, 柳公子</span>
+                        </div>
+                    
+                    <div class="pagination">
+                        <ul>
+                                                            <li><a class="round pre" id="pre" href="http://huliuqing.github.io/page/3">3</a></li>
+                            
+                                                    </ul>
+                    </div>
+                </div><!--end/posts-->
+
+			</div><!--end /contents-->
+
+			<div class="footer">
+				<div class="social span3">
+					<h3>关注我</h3>
+					<ul>
+						<li><a class="glyph" href="" title=""><i class="icon-weibo"></i></a></li>
+						<li><a class="glyph" href="" title="点点网博客"> 点点网</a></li>
+						<li><a class="glyph" href="" title="柳公子的gmail邮箱"> stackoverflow</a></li>
+					</ul>
+				</div>				
+				<div class="list span3">
+					<h3>我的博客</h3>
+					<ul>
+			        	<li><a href="http://stackoverflow.com/users/1969039/liuqing-hu" title="柳公子在stackoverflow">stackoverflow</a></li>
+			        	<li><a href="https://github.com/huliuqing" title="柳公子在github" >github</a></li>
+			        	<li><a href="http://huliuqing.diandian.com" title="柳公子在点点博客">柳公子 - 点点网</a></li>
+			        	<li><a href="http://weibo.com/focusliuqing" title="柳公子在新浪微博">柳公子 - weibo</a></li>
+					              
+					</ul>
+				</div>	
+
+				<div class="list span3">
+					<h3>主题</h3>
+					<ul>
+						<li>社交图标 by <a href="https://github.com/lexrus/fontdiao" title="fontdiao"> fontdiao</a></li>
+						<li>主题 by <a href="https://huliuqing.github.io" title="柳公子">柳公子</a></li>
+					</ul>
+				</div>
+			</div><!--end/footer-->
+		</div><!--end/wrapper-->
+	</body>	
+	
+	<script type="text/javascript">
+	var s=document.getElementById('search'), b=document.getElementById('sbutton');
+	b.onclick = function() {
+		if(s.value != '') {
+			window.open("https://www.google.com.hk/#q=site:http://huliuqing.github.io "+s.value);
+		} else {
+			alert('请输入搜索内容');
+		}
+	}	
+	</script>
+	
+	<script type="text/javascript">
+	$(function () {
+		$("pre").addClass("prettyprint linenums");
+		prettyPrint();
+	})
+	</script>
+
+</html>
